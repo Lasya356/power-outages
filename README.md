@@ -1,4 +1,4 @@
-# power-outages
+# Power Outages Data Analysis
 
 ## Introduction
 
