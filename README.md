@@ -142,7 +142,7 @@ Outage Duration vs. Climate Category
 Outage Duration vs. Cause Category and Climate Category
 
 <iframe
-  src="assets/BI-outage-dur-vs-cause-and-climate-cat.html.html"
+  src="assets/BI-outage-dur-vs-cause-and-climate-cat.html"
   width="1100"
   height="500"
   frameborder="0"
