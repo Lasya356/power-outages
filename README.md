@@ -46,36 +46,31 @@ Below is a detailed description of the data cleaning procedure that we implement
 
    - We combined the `OUTAGE.START.DATE` and `OUTAGE.START.TIME` columns into one datetime column named `OUTAGE.START`.<br>Likewise, we repeated the same for `OUTAGE.RESTORATION.DATE` and `OUTAGE.RESTORATION.TIME` into the new column: `OUTAGE.RESTORATION`.
    - This step made sure that both the outage start and restoration time information were consolidated into a single datetime format, reducing redundant details.
-     <br>
 
 2. Convert Index and Columns to Their Appropriate Data Types
 
    - We converted the `OBS` index, along with the `YEAR` and `MONTH` columns to integers. It seems more reasonable for the `MONTH` and `YEAR` columns to be stored as integers, rather than as floats (specifically converted `MONTH` to a nullible integer `Int64`, to account for any missing values).
-     <br>
 
 3. Handle Missing Data
 
    - We filled missing values in the `CUSTOMERS.AFFECTED` column to 0.0, as NaN values in this column suggest that no customers were affected by the outage event.
    - Also converted the `DEMAND.LOSS.MW` column to float and filled any missing values with 0.0, as any missing demand loss could imply no measurable demand lost during the outage.
-     <br>
 
 4. Creating and Renaming Columns
 
    - We renamed the `OUTAGE.DURATION` column to `OUTAGE.DURATION (MINUTES)` to clarify the units.
    - Created a new column, `OUTAGE.DURATION.HOURS` by dividing the `OUTAGE.DURATION (MINUTES)` by 60 to help with simpler graphing during our later analysis.
    - Renamed the `U.S._STATE` column to just `STATE` for easier access to the column.
-     <br>
 
 5. Selecting Relevant Columns
 
    - To simplify the dataset, we only retained the columns that were relevant to our analysis (only kept the columns described in the previous section).
-     <br>
 
 6. Canonicalization
 
    - We removed the periods and underscores in the column names and also lower-cased the column names to achieve unformity in the dataset's columns.
-     <br>
 
+<br>
 Below are the first five rows of the cleaned dataset that we will be utilizing for our analysis:
 
 | obs | month | year | state     | postal code | nerc region | climate region     | climate category | outage start        | outage restoration  | outage duration (minutes) | outage duration (hours) | cause category     | cause category detail | customers affected | total customers |  population | demand loss mw |
