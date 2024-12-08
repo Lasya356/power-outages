@@ -116,7 +116,7 @@ Outage Duration vs. Customers Affected
 
 <iframe
   src="assets/BI-outage-dur-vs-customers-affected.html"
-  width="850"
+  width="900"
   height="400"
   frameborder="0"
 ></iframe>
@@ -126,7 +126,7 @@ Outage Duration vs. Cause Category
 <iframe
   src="assets/BI-outage-dur-vs-cause-cat.html"
   width="1050"
-  height="60"
+  height="600"
   frameborder="0"
 ></iframe>
 
