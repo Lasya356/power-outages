@@ -83,11 +83,11 @@ Below are the first five rows of the cleaned dataset that we will be utilizing f
 
 ### Univariate Analysis
 
-Number of Outages Per Year Plot
+Number of Outages Per Year
 
 <iframe
   src="assets/UNI-num-outages-per-year.html"
-  width="1200"
+  width="1500"
   height="800"
   frameborder="0"
 ></iframe>
