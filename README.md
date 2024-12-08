@@ -4,7 +4,7 @@
 
 ## Introduction
 
-### Dataset and project Question Introduction
+### Dataset and Project Question Introduction
 
 The dataset we chose to analyze contains information on major power outages across the United States, including factors such as the number of customers affected, outage duration, demand loss, cause category, and more. The guiding question for our project is: <u>what factors are associated with the severity of major power outages?</u>
 
@@ -47,7 +47,7 @@ Below is a detailed description of the data cleaning procedure that we implement
    - We combined the `OUTAGE.START.DATE` and `OUTAGE.START.TIME` columns into one datetime column named `OUTAGE.START`.<br>Likewise, we repeated the same for `OUTAGE.RESTORATION.DATE` and `OUTAGE.RESTORATION.TIME` into the new column: `OUTAGE.RESTORATION`.
    - This step made sure that both the outage start and restoration time information were consolidated into a single datetime format, reducing redundant details.
 
-2. Convert Index and Columns to Their Appropriate Data Types
+2. Convert Index and Columns to Appropriate Data Types
 
    - We converted the `OBS` index, along with the `YEAR` and `MONTH` columns to integers. It seems more reasonable for the `MONTH` and `YEAR` columns to be stored as integers, rather than as floats (specifically converted `MONTH` to a nullible integer `Int64`, to account for any missing values).
 
@@ -80,6 +80,17 @@ Below are the first five rows of the cleaned dataset that we will be utilizing f
 |   3 |    10 | 2010 | Minnesota | MN          | MRO         | East North Central | cold             | 2010-10-26 20:00:00 | 2010-10-28 22:00:00 |                      3000 |                      50 | severe weather     | heavy wind            |              70000 |      2.5869e+06 |  5.3109e+06 |              0 |
 |   4 |     6 | 2012 | Minnesota | MN          | MRO         | East North Central | normal           | 2012-06-19 04:30:00 | 2012-06-20 23:00:00 |                      2550 |                    42.5 | severe weather     | thunderstorm          |              68200 |     2.60681e+06 | 5.38044e+06 |              0 |
 |   5 |     7 | 2015 | Minnesota | MN          | MRO         | East North Central | warm             | 2015-07-18 02:00:00 | 2015-07-19 07:00:00 |                      1740 |                      29 | severe weather     | nan                   |             250000 |     2.67353e+06 | 5.48959e+06 |            250 |
+
+### Univariate Analysis
+
+<iframe
+  src="assets/UNI_num_outages_per_year"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+### Bivariate Analysis
 
 ## Assessment of Missingness
 
