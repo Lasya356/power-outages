@@ -106,7 +106,7 @@ Number of Outages by State
 <iframe
   src="assets/UNI-num-outages-by-state.html"
   width="1200"
-  height="500"
+  height="700"
   frameborder="0"
 ></iframe>
 
@@ -116,8 +116,8 @@ Outage Duration vs. Customers Affected
 
 <iframe
   src="assets/BI-outage-dur-vs-customers-affected.html"
-  width="800"
-  height="500"
+  width="1300"
+  height="900"
   frameborder="0"
 ></iframe>
 
@@ -125,8 +125,8 @@ Outage Duration vs. Cause Category
 
 <iframe
   src="assets/BI-outage-dur-vs-cause-cat.html"
-  width="800"
-  height="500"
+  width="1300"
+  height="900"
   frameborder="0"
 ></iframe>
 
