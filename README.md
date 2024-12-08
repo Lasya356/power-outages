@@ -84,7 +84,7 @@ Below are the first five rows of the cleaned dataset that we will be utilizing f
 ### Univariate Analysis
 
 <iframe
-  src="assets/UNI_num_outages_per_year"
+  src="../assets/UNI_num_outages_per_year"
   width="800"
   height="600"
   frameborder="0"
