@@ -86,7 +86,7 @@ Below are the first five rows of the cleaned dataset that we will be utilizing f
 Number of Outages Per Year Plot
 
 <iframe
-  src="../assets/UNI-num-outages-per-year.html"
+  src="/projects/project04/assets/UNI-num-outages-per-year.html"
   width="800"
   height="600"
   frameborder="0"
