@@ -87,8 +87,8 @@ Number of Outages Per Year Plot
 
 <iframe
   src="assets/UNI-num-outages-per-year.html"
-  width="800"
-  height="600"
+  width="1200"
+  height="800"
   frameborder="0"
 ></iframe>
 
