@@ -116,8 +116,8 @@ Outage Duration vs. Customers Affected
 
 <iframe
   src="assets/BI-outage-dur-vs-customers-affected.html"
-  width="1300"
-  height="900"
+  width="800"
+  height="600"
   frameborder="0"
 ></iframe>
 
@@ -125,8 +125,8 @@ Outage Duration vs. Cause Category
 
 <iframe
   src="assets/BI-outage-dur-vs-cause-cat.html"
-  width="1300"
-  height="900"
+  width="1000"
+  height="500"
   frameborder="0"
 ></iframe>
 
@@ -134,7 +134,7 @@ Outage Duration vs. Climate Category
 
 <iframe
   src="assets/BI-outage-dur-vs-climate-cat.html"
-  width="800"
+  width="1100"
   height="500"
   frameborder="0"
 ></iframe>
@@ -143,7 +143,7 @@ Outage Duration vs. Cause Category and Climate Category
 
 <iframe
   src="assets/BI-outage-dur-vs-cause-and-climate-cat.html.html"
-  width="800"
+  width="1100"
   height="500"
   frameborder="0"
 ></iframe>
