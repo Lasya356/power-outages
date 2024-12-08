@@ -83,7 +83,7 @@ Below are the first five rows of the cleaned dataset that we will be utilizing f
 
 ### Univariate Analysis
 
-Number of Outages Per Year Plot
+Number of Outages Per Year
 
 <iframe
   src="assets/UNI-num-outages-per-year.html"
@@ -92,7 +92,72 @@ Number of Outages Per Year Plot
   frameborder="0"
 ></iframe>
 
+Number of Outages Per Month
+
+<iframe
+  src="assets/UNI-num-outages-per-month.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+Number of Outages by State
+
+<iframe
+  src="assets/UNI-num-outages-by-state.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
 ### Bivariate Analysis
+
+Outage Duration vs. Customers Affected
+
+<iframe
+  src="assets/BI-outage-dur-vs-customers-affected.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+Outage Duration vs. Cause Category
+
+<iframe
+  src="assets/BI-outage-dur-vs-cause-cat.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+Outage Duration vs. Climate Category
+
+<iframe
+  src="assets/BI-outage-dur-vs-climate-cat.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+Outage Duration vs. Cause Category and Climate Category
+
+<iframe
+  src="assets/BI-outage-dur-vs-cause-and-climate-cat.html.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+Customers Affected vs. Demand Loss
+
+<iframe
+  src="assets/BI-customers-affected-vs-demand-loss.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+### Interesting Aggregates
 
 ## Assessment of Missingness
 
