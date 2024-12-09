@@ -88,7 +88,7 @@ Number of Outages Per Year
 <iframe
   src="assets/UNI-num-outages-per-year.html"
   width="850"
-  height="550"
+  height="450"
   frameborder="0"
 ></iframe>
 
@@ -97,7 +97,7 @@ Number of Outages Per Month
 <iframe
   src="assets/UNI-num-outages-per-month.html"
   width="850"
-  height="550"
+  height="450"
   frameborder="0"
 ></iframe>
 
@@ -117,7 +117,7 @@ Outage Duration vs. Customers Affected
 <iframe
   src="assets/BI-outage-dur-vs-customers-affected.html"
   width="900"
-  height="500"
+  height="450"
   frameborder="0"
 ></iframe>
 
@@ -135,7 +135,7 @@ Outage Duration vs. Climate Category
 <iframe
   src="assets/BI-outage-dur-vs-climate-cat.html"
   width="1150"
-  height="500"
+  height="450"
   frameborder="0"
 ></iframe>
 
@@ -153,7 +153,7 @@ Customers Affected vs. Demand Loss
 <iframe
   src="assets/BI-customers-affected-vs-demand-loss.html"
   width="850"
-  height="600"
+  height="500"
   frameborder="0"
 ></iframe>
 
