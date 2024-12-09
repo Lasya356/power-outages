@@ -170,10 +170,9 @@ Below is the empirical distribution of the Total Variation Distance (TVD).
 <iframe
   src="assets/MD-month-outage-rest-tvd.html"
   width="1000"
-  height="650"
+  height="500"
   frameborder="0"
 ></iframe>
-
 **Conclusion**: After conducting the permutation test, the p-value obtained was 0.136, which is greater than the specified significance level of 0.05. Thus, we fail to reject the null hypothesis -- that the distribution of `month` is the same when `outage restoration` is missing and not missing -- meaning that the missingness of the `outage restoration` column is not dependent on the `month` column.
 
 #### Month Against Cause Category Detail
