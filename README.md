@@ -261,15 +261,21 @@ From the hypothesis test conducted above, we found that there is a significant d
 
 Simply put, our prediction problem is a multiclass classification task, where we aim to predict the cause of a major power outage (i.e. the `cause category` column).
 
-We will be building a decision tree classifier to predict the `cause category` column, given only two feature columns: `climate region` (a categorical nominal column) and `outage duration (hours)` (a quantitative continuous column). We chose `cause category` as our response variable, as it can provide important information about the cause of the outage, which can allow utility companies to implement preventive measures and improve infrastructure where needed. The two mentioned features will generally be available at the time of prediction.
+We will be building a random forest classifier to predict the `cause category` column (response variable) because it can provide important information about the cause of the outage, which can allow utility companies to implement preventive measures and improve infrastructure where needed. The two mentioned features will generally be available at the time of prediction.
 
-Accuracy as an evalutaion metric can oftentimes be misleading if the classes in `cause category` are imbalanced. For instance, if severe weather were to occur more frequently as a cause than, islanding, for example, then accuracy will likely exaggerate our model's performance. Because this may very well be the case, we will opt for the F-1 score, as it does a great job of factoring in the model's precision and recall when a class imbalance is present.
+We will be using accuracy as one of our metrics. Accuracy as an evaluation metric can oftentimes be misleading if the classes in `cause category` are imbalanced. For instance, if severe weather were to occur more frequently as a cause than, islanding, for example, then accuracy will likely exaggerate our model's performance. Because this may very well be the case, we will opt for the F-1 score as well, as it does a great job of factoring in the model's precision and recall when a class imbalance is present.
 
 ## Baseline Model
 
-For our baseline model, we can start small by implementing a decision tree classifier to predict the `cause category` column based on `climate region` and `outage duration (hours)`.
+For our baseline model, we used a Random Forest classifier to predict the `cause category` of major power outages, given only two feature columns: `climate region` (a categorical nominal column) and `outage duration (hours)` (a quantitative continuous column). `climate region` and `outage duration (hours)`.
 
-We first one-hot-encoded the `climate region` column and dropped the first column to avoid dealing with redundant features. Next, we standardized the `outage durations (hours)` column, as it will allow the decision tree classifier model to work more efficiently.
+We dropped any missing values in the `climate region` and `outage duration (hours)` to keep the model simple and avoid any issues while fitting the model.
+
+We one-hot-encoded `climate region` and dropped the first column from the result of nine binary columns to avoid multicollinearity. Next, we standardized the `outage durations (hours)` column, as it will allow the random forest classifier model to perform more efficiently.
+
+After fitting the model, it achieved an accuracy of 61.41% and an F-1 score of 35.99%. This model performed quite poorly, considering the large discrepancy between the F-1 and accuracy scores. This also suggests a heavy class imbalance, likely due the high frequency of the 'severe weather' cause category, causing our baseline model to predict this category often.
+
+Our baseline model did not perform well, due to the presence of class imbalance within the target variable. The model's reliance on predicting the 'severe weather' cause category often greatly overstates the model's performance and ability to generalize to unseen data.
 
 ## Final Model
 
