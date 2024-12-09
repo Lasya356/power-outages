@@ -170,7 +170,7 @@ Below is the empirical distribution of the Total Variation Distance (TVD).
 <iframe
   src="assets/MD-month-outage-rest-tvd.html"
   width="1000"
-  height="550"
+  height="650"
   frameborder="0"
 ></iframe>
 
