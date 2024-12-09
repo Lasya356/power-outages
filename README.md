@@ -66,10 +66,6 @@ Below is a detailed description of the data cleaning procedure that we implement
 
    - We removed the periods and underscores in the column names and also lower-cased the column names to achieve unformity in the dataset's columns.
 
-<!-- 3. Handle Missing Data
-
-   - We filled missing values in the `CUSTOMERS.AFFECTED` column to 0.0, as NaN values in this column suggest that no customers were affected by the outage event.
-   - Also converted the `DEMAND.LOSS.MW` column to float and filled any missing values with 0.0, as any missing demand loss could imply no measurable demand lost during the outage. -->
 <br>
 Below are the first five rows of the cleaned dataset that we will be utilizing for our analysis:
 
@@ -94,7 +90,7 @@ The histogram below displays the frequency distribution of the different cause c
 
 ### Bivariate Analysis
 
-Outage Duration vs. Cause Category
+The box plot below displays the relationship between cause categories of power outages and their durations. Based on this plot, we can infer that severe weather and fuel supply emergencies seem to cause longer-lasting power outages; whereas, islanding and intentional attack appear to cause outage events of the shortest durations.
 
 <iframe
   src="assets/BI-outage-dur-vs-cause-cat.html"
@@ -121,17 +117,18 @@ The following dataframe summarizes the aggregated mean values for these factors,
 | West               |                 27.1389 |             194580 |        651.457 |
 | West North Central |                 11.6094 |              47316 |            326 |
 
-From this aggregation, it is evident that the East North Central climate region seems to have the longest lasting power outage events, on average, while the West North Central climate region seems to have the shortest. Additionally, the West North Central region also appears to have the least amount of customers affected and demand loss, on average.
-
-This aggregation is interesting, as it provides insights into the influence of climate region on factors such as outage duration, customers affected, and demand loss (megawatts). This information can help utility or energy companies to dedicate and prioritize resources to those climate regions with greater impacts (i.e. longer outage durations, more customers affected, higher demand loss, etc.). It could also allow them to invest in crucial infrastructure upgrades in order to mitigate and minimize the impact of future outage events.
-
-<br>
 <iframe
   src="assets/AGG-climate-region-outage-dur.html"
   width="1000"
   height="550"
   frameborder="0"
 ></iframe>
+
+From the above bar chart and the aggregated table, it is evident that the East North Central climate region seems to have the longest lasting power outage events, on average, while the West North Central climate region seems to have the shortest.
+
+Additionally, the West North Central region also appears to have the least amount of customers affected and demand loss, on average.
+
+This aggregation is interesting, as it provides insights into the influence of climate region on factors such as outage duration, customers affected, and demand loss (megawatts). This information can help utility or energy companies to dedicate and prioritize resources to those climate regions with greater impacts (i.e. longer outage durations, more customers affected, higher demand loss, etc.). It could also allow them to invest in crucial infrastructure upgrades in order to mitigate and minimize the impact of future outage events.
 
 ## Assessment of Missingness
 
@@ -159,9 +156,10 @@ We tested whether the missingness in the `outage restoration` column is dependen
 
 **Significance Level**: We chose to set the significance level at 0.05.
 
-**Resulting P-Value**: After performing 1,000 permutations, we got a p-value of 0.136.
+**Resulting P-Value**: After performing 10,000 permutations, we got a p-value of 0.1238.
 
 **Visualizations**:
+
 Below is a horizontal bar chart depicting the distribution of the `month` column when `outage restoration` is missing and when it is not missing.
 
 <iframe
@@ -195,9 +193,10 @@ We tested whether the missingness in the `cause category detail` column is depen
 
 **Significance Level**: We chose to set the significance level at 0.05.
 
-**Resulting P-Value**: After performing 1,000 permutations, we got a p-value of 0.0.
+**Resulting P-Value**: After performing 10,000 permutations, we got a p-value of 0.0.
 
 **Visualizations**:
+
 Below is a horizontal bar chart depicting the distribution of the `month` column when `cause category detail` is missing and when it is not missing.
 
 <iframe
@@ -212,7 +211,7 @@ Below is the empirical distribution of the Total Variation Distance (TVD).
 <iframe
   src="assets/MD-month-ccd-tvd.html"
   width="1000"
-  height="450"
+  height="500"
   frameborder="0"
 ></iframe>
 
@@ -235,6 +234,7 @@ In this hypothesis test, we examine whether the distribution of climate regions,
 **Resulting P-Value**: After performing 10,000 permutations, we got a p-value of 0.0.
 
 **Visualizations**:
+
 Below is a horizontal bar chart depicting the distribution of the cause categories over the two climate regions: West and Central.
 
 <iframe
