@@ -153,7 +153,7 @@ Customers Affected vs. Demand Loss
 <iframe
   src="assets/BI-customers-affected-vs-demand-loss.html"
   width="850"
-  height="500"
+  height="550"
   frameborder="0"
 ></iframe>
 
