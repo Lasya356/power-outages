@@ -173,6 +173,13 @@ It's evident that the.
 | Northwest          |                 21.4083 |            38242.7 |        78.1667 |
 | South              |                  47.435 |             124204 |        181.245 |
 
+<iframe
+  src="assets/AGG-customers-affected-by-climate-reg.html"
+  width="850"
+  height="600"
+  frameborder="0"
+></iframe>
+
 ## Assessment of Missingness
 
 ## Hypothesis Testing
