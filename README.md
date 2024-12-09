@@ -6,7 +6,7 @@
 
 ### Dataset and Project Question Introduction
 
-The dataset we chose to analyze contains information on major power outages across the United States, including factors such as the number of customers affected, outage duration, demand loss, cause category, and more. The guiding question for our project is: <u>what factors are associated with the severity of major power outages?</u>
+The dataset we chose to analyze contains information on major power outages across the United States from January 2000 to July 2016, including factors such as the number of customers affected, outage duration, demand loss, cause category, and more. The dataset we used can be retrieved from https://engineering.purdue.edu/LASCI/research-data/outages. The guiding question for our project is: <u>what factors are associated with the severity of major power outages?</u>
 
 By analyzing a range of variables this dataset has to offer, we aim to uncover patterns that can help predict future major outages. Furthermore, our analysis and our research question are important because understanding the factors influencing outage severity can help utility or energy companies better anticipate and reduce the scale of future major outages.
 
