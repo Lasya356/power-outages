@@ -87,10 +87,11 @@ Frequency of Cause Categories
 
 <iframe
   src="assets/UNI-cause-cat-freq.html"
-  width="850"
+  width="950"
   height="450"
   frameborder="0"
 ></iframe>
+The histogram above displays the frequency distribution of the different cause categories for power outage events. The 'severe weather' cause category seems to have the highest frequency, which could possibly suggest that weather-related events are a leading cause for major power outages.
 
 ### Bivariate Analysis
 
