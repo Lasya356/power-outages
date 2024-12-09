@@ -92,33 +92,6 @@ Frequency of Cause Categories
   frameborder="0"
 ></iframe>
 
-<!-- Number of Outages Per Year
-
-<iframe
-  src="assets/UNI-num-outages-per-year.html"
-  width="850"
-  height="450"
-  frameborder="0"
-></iframe>
-
-Number of Outages Per Month
-
-<iframe
-  src="assets/UNI-num-outages-per-month.html"
-  width="850"
-  height="450"
-  frameborder="0"
-></iframe>
-
-Number of Outages by State
-
-<iframe
-  src="assets/UNI-num-outages-by-state.html"
-  width="1200"
-  height="650"
-  frameborder="0"
-></iframe> -->
-
 ### Bivariate Analysis
 
 Outage Duration vs. Cause Category
@@ -129,42 +102,6 @@ Outage Duration vs. Cause Category
   height="550"
   frameborder="0"
 ></iframe>
-
-<!-- Outage Duration vs. Customers Affected
-
-<iframe
-  src="assets/BI-outage-dur-vs-customers-affected.html"
-  width="900"
-  height="450"
-  frameborder="0"
-></iframe>
-
-Outage Duration vs. Climate Category
-
-<iframe
-  src="assets/BI-outage-dur-vs-climate-cat.html"
-  width="1100"
-  height="450"
-  frameborder="0"
-></iframe>
-
-Outage Duration vs. Cause Category and Climate Category
-
-<iframe
-  src="assets/BI-outage-dur-vs-cause-and-climate-cat.html"
-  width="1100"
-  height="500"
-  frameborder="0"
-></iframe>
-
-Customers Affected vs. Demand Loss
-
-<iframe
-  src="assets/BI-customers-affected-vs-demand-loss.html"
-  width="850"
-  height="525"
-  frameborder="0"
-></iframe> -->
 
 ### Interesting Aggregates
 
@@ -233,7 +170,7 @@ Below is the empirical distribution of the Total Variation Distance (TVD).
 <iframe
   src="assets/MD-month-outage-rest-tvd.html"
   width="1000"
-  height="450"
+  height="550"
   frameborder="0"
 ></iframe>
 
