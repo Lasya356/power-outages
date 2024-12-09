@@ -210,13 +210,6 @@ In this hypothesis test, we examine whether the distribution of climate regions,
 **Visualization**:
 Below is a histogram illustrating the distribution of our test statistics from the permutation test. The test statistic represents the total variation distance between the West and Central climate region distributions across 10,000 permutations. The observed test statistic (red line) is also shown.
 
-<iframe
-  src="assets/TEST-tvd-cause-cat.html"
-  width="850"
-  height="550"
-  frameborder="0"
-></iframe>
-
 **Conclusion**: After conducting the permutation test, the p-value obtained was 0.0, which is much less than the specified significance level of 0.05. Thus, we reject the null hypothesis and conclude that there is a significant difference in the distribution of the West and Central climate regions across all cause categories.
 
 ## Framing a Prediction Problem
