@@ -279,7 +279,7 @@ Our baseline model did not perform well, due to the presence of class imbalance 
 
 ## Final Model
 
-1. Feature Engineering
+<!-- 1. Feature Engineering
 
 - `year` : one-hot encode
 - `climate region` : one-hot encode
@@ -288,6 +288,6 @@ Our baseline model did not perform well, due to the presence of class imbalance 
 - `demand loss (mw)`: standardize
 
 acc=0.8197674418604651
-f1=0.6004905812710123
+f1=0.6004905812710123 -->
 
 ## Fairness Analysis
