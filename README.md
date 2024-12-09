@@ -44,12 +44,13 @@ Below is a detailed description of the data cleaning procedure that we implement
 
 1. Combining Date and Time Columns
 
-   - We combined the `OUTAGE.START.DATE` and `OUTAGE.START.TIME` columns into one datetime column named `OUTAGE.START`.<br>Likewise, we repeated the same for `OUTAGE.RESTORATION.DATE` and `OUTAGE.RESTORATION.TIME` into the new column: `OUTAGE.RESTORATION`.
+   - We combined the `OUTAGE.START.DATE` and `OUTAGE.START.TIME` columns into one datetime column named `OUTAGE.START`. Likewise, we repeated the same for `OUTAGE.RESTORATION.DATE` and `OUTAGE.RESTORATION.TIME` into the new column: `OUTAGE.RESTORATION`.
    - This step made sure that both the outage start and restoration time information were consolidated into a single datetime format, reducing redundant details.
 
 2. Convert Index and Columns to Appropriate Data Types
 
-   - We converted the `OBS` index, along with the `YEAR` and `MONTH` columns to integers. It seems more reasonable for the `MONTH` and `YEAR` columns to be stored as integers, rather than as floats (specifically converted `MONTH` to a nullible integer `Int64`, to account for any missing values).
+   - We converted the `OBS` index, along with the `YEAR` and `MONTH` columns to integers.
+   - It seems more reasonable for the `MONTH` and `YEAR` columns to be stored as integers, rather than as floats (specifically converted `MONTH` to a nullible integer `Int64`, to account for any missing values).
 
 3. Creating, Removing, and Renaming Columns
 
@@ -201,7 +202,7 @@ However, additional data can be gathered to make the missingness of this column 
 
 In this section, we investigates whether there was a missingness dependency between the `month` column and two other columns: `outage restoration` and `cause category detail`.
 
-#### `month` Against `outage restoration`
+#### Month Against Outage Restoration
 
 We tested whether the missingness in the `outage restoration` column is dependent on the `month` column.
 
@@ -232,13 +233,13 @@ Below is the empirical distribution of the Total Variation Distance (TVD).
 <iframe
   src="assets/MD-month-outage-rest-tvd.html"
   width="1000"
-  height="550"
+  height="400"
   frameborder="0"
 ></iframe>
 
 **Conclusion**: After conducting the permutation test, the p-value obtained was 0.136, which is greater than the specified significance level of 0.05. Thus, we fail to reject the null hypothesis -- that the distribution of `month` is the same when `outage restoration` is missing and not missing -- meaning that the missingness of the `outage restoration` column is not dependent on the `month` column.
 
-#### `month` Against `cause category detail`
+#### Month Against Cause Category Detail
 
 We tested whether the missingness in the `cause category detail` column is dependent on the `month` column.
 
@@ -304,7 +305,7 @@ Below is a horizontal bar chart depicting the distribution of the cause categori
 Below is a histogram illustrating the distribution of our test statistics from the permutation test. The test statistic represents the total variation distance between the West and Central climate region distributions across 10,000 permutations. The observed test statistic (red line) is also shown.
 
 <iframe
-  src="assets/UNI-TEST-tvd-cause-cat.html"
+  src="assets/TEST-tvd-cause-cat.html"
   width="850"
   height="450"
   frameborder="0"
