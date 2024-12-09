@@ -206,7 +206,7 @@ Below is a histogram illustrating the distribution of our test statistics from t
 
 <iframe
   src="assets/TEST-plot-cause-cat.html"
-  width="500"
+  width="800"
   height="500"
   frameborder="0"
 ></iframe>
