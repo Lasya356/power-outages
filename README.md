@@ -61,7 +61,7 @@ Below is a detailed description of the data cleaning procedure that we implement
    - We renamed the `OUTAGE.DURATION` column to `OUTAGE.DURATION (MINUTES)` to clarify the units.
    - Created a new column, `OUTAGE.DURATION.HOURS` by dividing the `OUTAGE.DURATION (MINUTES)` by 60 to help with simpler graphing during our later analysis.
    - Renamed the `U.S._STATE` column to just `STATE` for easier access to the column.
-   - Created a new column called `SEVERITY`, which is a linear combination of `OUTAGE.DURATION.HOURS`, `CUSTOMERS.AFFECTED`, and `DEMAND.LOSS.MW`.
+   - Created a new column called `SEVERITY`, which is a linear combination of `OUTAGE.DURATION.HOURS`, `CUSTOMERS.AFFECTED`, and `DEMAND.LOSS.MW`. We also standardized this column.
      - This column will be used later for testing hypotheses.
 
 5. Selecting Relevant Columns
@@ -108,7 +108,7 @@ Number of Outages by State
 <iframe
   src="assets/UNI-num-outages-by-state.html"
   width="1200"
-  height="550"
+  height="650"
   frameborder="0"
 ></iframe>
 
