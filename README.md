@@ -87,7 +87,7 @@ Number of Outages Per Year
 
 <iframe
   src="assets/UNI-num-outages-per-year.html"
-  width="800"
+  width="850"
   height="550"
   frameborder="0"
 ></iframe>
@@ -96,7 +96,7 @@ Number of Outages Per Month
 
 <iframe
   src="assets/UNI-num-outages-per-month.html"
-  width="800"
+  width="850"
   height="550"
   frameborder="0"
 ></iframe>
