@@ -279,7 +279,7 @@ Our baseline model did not perform well, due to the presence of class imbalance 
 
 ## Final Model
 
-1. Feature Engineering
+<!-- 1. Feature Engineering
 
 - `year` : one-hot encode
 - `climate region` : one-hot encode
@@ -293,6 +293,6 @@ f1 score = 0.30630773599402067
 
 **final model**
 accuracy score = 0.9841269841269841
-f1 score = 0.9538464922202952
+f1 score = 0.9538464922202952 -->
 
 ## Fairness Analysis
