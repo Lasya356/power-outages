@@ -233,7 +233,7 @@ Below is the empirical distribution of the Total Variation Distance (TVD).
 <iframe
   src="assets/MD-month-outage-rest-tvd.html"
   width="1000"
-  height="400"
+  height="450"
   frameborder="0"
 ></iframe>
 
@@ -307,7 +307,7 @@ Below is a histogram illustrating the distribution of our test statistics from t
 <iframe
   src="assets/TEST-tvd-cause-cat.html"
   width="850"
-  height="450"
+  height="550"
   frameborder="0"
 ></iframe>
 
