@@ -90,7 +90,7 @@ The histogram below displays the frequency distribution of the different cause c
 
 ### Bivariate Analysis
 
-The box plot below displays the relationship between cause categories of power outages and their durations. Based on this plot, we can infer that severe weather and fuel supply emergencies seem to cause longer-lasting power outages; whereas, islanding and intentional attack appear to cause outage events of the shortest durations.
+The box plot below displays the relationship between cause categories of power outages and their durations. Based on this plot, we can infer that severe weather and fuel supply emergencies seem to cause power outages of the longest median durations; whereas, islanding and intentional attack appear to cause outage events of the shortest median durations.
 
 <iframe
   src="assets/BI-outage-dur-vs-cause-cat.html"
@@ -211,7 +211,7 @@ Below is the empirical distribution of the Total Variation Distance (TVD).
 <iframe
   src="assets/MD-month-ccd-tvd.html"
   width="1000"
-  height="500"
+  height="550"
   frameborder="0"
 ></iframe>
 
@@ -257,7 +257,19 @@ Below is a histogram illustrating the distribution of our test statistics from t
 
 ## Framing a Prediction Problem
 
+From the hypothesis test conducted above, we found that there is a significant difference in some of the climate regions across all cause categories. This detail suggests that climatic factors could possibly influence the cause of outages. Assuming this, it's important to determine whether we can predict the cause category based on other variables, such as climate region, outage duration, customers affected, etc.
+
+Simply put, our prediction problem is a multiclass classification task, where we aim to predict the cause of a major power outage (i.e. the `cause category` column).
+
+We will be building a decision tree classifier to predict the `cause category` column, given only two feature columns: `climate region` (a categorical nominal column) and `outage duration (hours)` (a quantitative continuous column). We chose `cause category` as our response variable, as it can provide important information about the cause of the outage, which can allow utility companies to implement preventive measures and improve infrastructure where needed. The two mentioned features will generally be available at the time of prediction.
+
+Accuracy as an evalutaion metric can oftentimes be misleading if the classes in `cause category` are imbalanced. For instance, if severe weather were to occur more frequently as a cause than, islanding, for example, then accuracy will likely exaggerate our model's performance. Because this may very well be the case, we will opt for the F-1 score, as it does a great job of factoring in the model's precision and recall when a class imbalance is present.
+
 ## Baseline Model
+
+For our baseline model, we can start small by implementing a decision tree classifier to predict the `cause category` column based on `climate region` and `outage duration (hours)`.
+
+We first one-hot-encoded the `climate region` column and dropped the first column to avoid dealing with redundant features. Next, we standardized the `outage durations (hours)` column, as it will allow the decision tree classifier model to work more efficiently.
 
 ## Final Model
 
