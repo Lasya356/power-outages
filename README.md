@@ -134,7 +134,7 @@ Outage Duration vs. Climate Category
 
 <iframe
   src="assets/BI-outage-dur-vs-climate-cat.html"
-  width="1150"
+  width="900"
   height="450"
   frameborder="0"
 ></iframe>
