@@ -106,7 +106,7 @@ Number of Outages by State
 <iframe
   src="assets/UNI-num-outages-by-state.html"
   width="1200"
-  height="650"
+  height="550"
   frameborder="0"
 ></iframe>
 
