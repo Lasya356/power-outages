@@ -1,12 +1,12 @@
 # Power Outages Data Analysis
 
-<p>Authors: Ritvik Mohindru and Sai Sri Lasya Yadlapati</p>
+<!-- <p>Authors: Ritvik Mohindru and Sai Sri Lasya Yadlapati</p> -->
 
 ## Introduction
 
 ### Dataset and Project Question Introduction
 
-The dataset we chose to analyze contains information on major power outages across the United States from January 2000 to July 2016, including factors such as the number of customers affected, outage duration, demand loss, cause category, and more. The dataset we used can be retrieved from [https://engineering.purdue.edu/LASCI/research-data/outages](https://engineering.purdue.edu/LASCI/research-data/outages). The guiding question for our project is: <u>what factors are associated with the severity of major power outages?</u>
+The dataset we chose to analyze contains information on major power outages across the United States from January 2000 to July 2016, including factors such as the number of customers affected, outage duration, demand loss, cause category, and more. The dataset we used can be retrieved from [https://engineering.purdue.edu/LASCI/research-data/outages](https://engineering.purdue.edu/LASCI/research-data/outages). The guiding question for our project is: <u>what characteristics are associated with each category of cause?</u>
 
 By analyzing a range of variables this dataset has to offer, we aim to uncover patterns that can help predict future major outages. Furthermore, our analysis and our research question are important because understanding the factors influencing outage severity can help utility or energy companies better anticipate and reduce the scale of future major outages.
 
@@ -187,31 +187,35 @@ It's evident that the.
 
 ## Hypothesis Testing
 
-In this hypothesis test, we examine whether the mean severity of power outages differs significantly between two cause categories: severe weather and equipment failure. This analysis is important, as it can help explain how weather-related events vs infrastructure issues can influence the severity of major power outages.
+In this hypothesis test, we examine whether the distribution of climate regions, specifically the West and Central climate regions, differs significantly across various cause categories. This analysis is important, as it can help explain the relationship between specific climate regions and cause categories and understand how regional factors could influence the types of events causing power outages.
 
-**Null Hypothesis**: There is no difference in the mean severity between severe weather and equipment failure cause categories.
+**Null Hypothesis**: There is no difference in the distribution of the West and Central climate regions across all cause categories.
 
-**Alternative Hypothesis**: There is a significant difference in the mean severity between severe weather and equipment failure cause categories.
+**Alternative Hypothesis**: There is a significant difference in the distribution of the West and Central climate regions across all cause categories.
 
-**Test Statistic**: Absolute difference of mean severity of the severe weather and equipment failure cause categories.
+**Test Statistic**: We used the Total Variation Distance (TVD) as our test statistic because it quantifies the difference between the categorical distributions of the West and Central climate regions across cause categories.
 
-**Significance Level**: We chose to set the significance level at 0.05, as it's a standard and commonly accepted significance level.
+**Significance Level**: We chose to set the significance level at 0.05.
 
-**Test**: We chose to use a permutation test, as it allows us to compare the mean severity between the severe weather and equipment failure cause categories without making assumptions about the distribution of the data they come from.
+**Test**: We chose to use a permutation test because it allows us to compare the distributions of West and Central climate regions across the cause categories without making assumptions about the underlying data distribution.
 
-**Resulting P-Value**: 0.025
+**Resulting P-Value**: After performing 10,000 permutations, we got a p-value of 0.0.
 
 **Visualization**:
-Below is a histogram illustrating the distribution of our test statistics from the permutation test, which represents the difference in means between severe weather and equipment failure categories across 10,000 permutations. The observed difference of means lies much off to right of the distribution, and the p-value of 0.0025 proves that the absolute difference in mean severity between the two cause categories is statistically significant at the 5% significance level.
+Below is a histogram illustrating the distribution of our test statistics from the permutation test, which represents the total variation distance between severe weather and equipment failure categories across 10,000 permutations. The observed difference of means lies much off to right of the distribution, and the p-value of 0.0025 proves that the absolute difference in mean severity between the two cause categories is statistically significant at the 5% significance level.
+
+Below is a histogram illustrating the distribution of our test statistic (TVD) from the permutation test, which represents the The observed TVD is represented by the vertical red line, and it is clear that it is far out to the right of the distribution, indicating that the observed TVD is much larger than most of the values obtained from shuffled data.
+
+Below is a histogram illustrating the distribution of our test statistics from the permutation test. The test statistic represents the total variation distance between the West and Central climate region distributions across 10,000 permutations. The observed test statistic (red line) is also shown.
 
 <iframe
-  src="assets/TEST-plot-cause-cat.html"
+  src="assets/TEST-tvd-cause-cat.html"
   width="850"
   height="550"
   frameborder="0"
 ></iframe>
 
-**Conclusion**: After conducting the permutation test, the p-value obtained was 0.025, which is less than the specified significance level of 0.05. Thus, we reject hte null hypothesis and conclude that there is a significant difference in the mean severity between power outages caused by severe weather and those caused by equipment failure. We can also conclude that cause category is associated with the severity of major power outages.
+**Conclusion**: After conducting the permutation test, the p-value obtained was 0.0, which is much less than the specified significance level of 0.05. Thus, we reject the null hypothesis and conclude that there is a significant difference in the distribution of the West and Central climate regions across all cause categories.
 
 ## Framing a Prediction Problem
 
