@@ -8,7 +8,7 @@
 
 The dataset we chose to analyze contains information on major power outages across the United States from January 2000 to July 2016, including factors such as the number of customers affected, outage duration, demand loss, cause category, and more. The dataset we used can be retrieved from [https://engineering.purdue.edu/LASCI/research-data/outages](https://engineering.purdue.edu/LASCI/research-data/outages). The guiding question for our project is: <u>what characteristics are associated with each category of cause?</u>
 
-By analyzing a range of variables this dataset has to offer, we aim to uncover patterns that can help predict future major outages. Furthermore, our analysis and our research question are important because understanding the factors influencing outage severity can help utility or energy companies better anticipate and reduce the scale of future major outages.
+By analyzing a range of variables this dataset has to offer, we aim to uncover patterns that are associated with different cause categories of major power outages. Furthermore, our analysis and our research question are important because understanding the various factors contributing to power outages can help utility or energy companies better anticipate and prepare for future major outages.
 
 ### Overview of Relevant Columns
 
@@ -51,24 +51,22 @@ Below is a detailed description of the data cleaning procedure that we implement
 
    - We converted the `OBS` index, along with the `YEAR` and `MONTH` columns to integers. It seems more reasonable for the `MONTH` and `YEAR` columns to be stored as integers, rather than as floats (specifically converted `MONTH` to a nullible integer `Int64`, to account for any missing values).
 
-3. Handle Missing Data
+<!-- 3. Handle Missing Data
 
    - We filled missing values in the `CUSTOMERS.AFFECTED` column to 0.0, as NaN values in this column suggest that no customers were affected by the outage event.
-   - Also converted the `DEMAND.LOSS.MW` column to float and filled any missing values with 0.0, as any missing demand loss could imply no measurable demand lost during the outage.
+   - Also converted the `DEMAND.LOSS.MW` column to float and filled any missing values with 0.0, as any missing demand loss could imply no measurable demand lost during the outage. -->
 
-4. Creating and Renaming Columns
+3. Creating and Renaming Columns
 
    - We renamed the `OUTAGE.DURATION` column to `OUTAGE.DURATION (MINUTES)` to clarify the units.
    - Created a new column, `OUTAGE.DURATION.HOURS` by dividing the `OUTAGE.DURATION (MINUTES)` by 60 to help with simpler graphing during our later analysis.
    - Renamed the `U.S._STATE` column to just `STATE` for easier access to the column.
-   - Created a new column called `SEVERITY`, which is a linear combination of `OUTAGE.DURATION.HOURS`, `CUSTOMERS.AFFECTED`, and `DEMAND.LOSS.MW`. We also standardized this column.
-     - This column will be used later for testing hypotheses.
 
-5. Selecting Relevant Columns
+4. Selecting Relevant Columns
 
    - To simplify the dataset, we only retained the columns that were relevant to our analysis (only kept the columns described in the previous section).
 
-6. Canonicalization
+5. Canonicalization
 
    - We removed the periods and underscores in the column names and also lower-cased the column names to achieve unformity in the dataset's columns.
 
@@ -85,7 +83,16 @@ Below are the first five rows of the cleaned dataset that we will be utilizing f
 
 ### Univariate Analysis
 
-Number of Outages Per Year
+Frequency of Cause Categories
+
+<iframe
+  src="assets/UNI-cause-cat-freq.html"
+  width="850"
+  height="450"
+  frameborder="0"
+></iframe>
+
+<!-- Number of Outages Per Year
 
 <iframe
   src="assets/UNI-num-outages-per-year.html"
@@ -110,18 +117,9 @@ Number of Outages by State
   width="1200"
   height="650"
   frameborder="0"
-></iframe>
+></iframe> -->
 
 ### Bivariate Analysis
-
-Outage Duration vs. Customers Affected
-
-<iframe
-  src="assets/BI-outage-dur-vs-customers-affected.html"
-  width="900"
-  height="450"
-  frameborder="0"
-></iframe>
 
 Outage Duration vs. Cause Category
 
@@ -129,6 +127,15 @@ Outage Duration vs. Cause Category
   src="assets/BI-outage-dur-vs-cause-cat.html"
   width="1050"
   height="550"
+  frameborder="0"
+></iframe>
+
+<!-- Outage Duration vs. Customers Affected
+
+<iframe
+  src="assets/BI-outage-dur-vs-customers-affected.html"
+  width="900"
+  height="450"
   frameborder="0"
 ></iframe>
 
@@ -141,14 +148,14 @@ Outage Duration vs. Climate Category
   frameborder="0"
 ></iframe>
 
-<!-- Outage Duration vs. Cause Category and Climate Category
+Outage Duration vs. Cause Category and Climate Category
 
 <iframe
   src="assets/BI-outage-dur-vs-cause-and-climate-cat.html"
   width="1100"
   height="500"
   frameborder="0"
-></iframe> -->
+></iframe>
 
 Customers Affected vs. Demand Loss
 
@@ -157,7 +164,7 @@ Customers Affected vs. Demand Loss
   width="850"
   height="525"
   frameborder="0"
-></iframe>
+></iframe> -->
 
 ### Interesting Aggregates
 
@@ -202,10 +209,6 @@ In this hypothesis test, we examine whether the distribution of climate regions,
 **Resulting P-Value**: After performing 10,000 permutations, we got a p-value of 0.0.
 
 **Visualization**:
-Below is a histogram illustrating the distribution of our test statistics from the permutation test, which represents the total variation distance between severe weather and equipment failure categories across 10,000 permutations. The observed difference of means lies much off to right of the distribution, and the p-value of 0.0025 proves that the absolute difference in mean severity between the two cause categories is statistically significant at the 5% significance level.
-
-Below is a histogram illustrating the distribution of our test statistic (TVD) from the permutation test, which represents the The observed TVD is represented by the vertical red line, and it is clear that it is far out to the right of the distribution, indicating that the observed TVD is much larger than most of the values obtained from shuffled data.
-
 Below is a histogram illustrating the distribution of our test statistics from the permutation test. The test statistic represents the total variation distance between the West and Central climate region distributions across 10,000 permutations. The observed test statistic (red line) is also shown.
 
 <iframe
