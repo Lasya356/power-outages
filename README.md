@@ -1,6 +1,6 @@
 # Power Outages Data Analysis
 
-<p>Authors: Ritvik Mohindru and Sai Sri Lasya Yadlapati</p>
+<p>Authors: Sai Sri Lasya Yadlapati and Ritvik Mohindru</p>
 
 ## Introduction
 
@@ -278,5 +278,16 @@ After fitting the model, it achieved an accuracy of 61.41% and an F-1 score of 3
 Our baseline model did not perform well, due to the presence of class imbalance within the target variable. The model's reliance on predicting the 'severe weather' cause category often greatly overstates the model's performance and ability to generalize to unseen data.
 
 ## Final Model
+
+1. Feature Engineering
+
+- `year` : one-hot encode
+- `climate region` : one-hot encode
+- `outage duration (hours)` : standardize
+- `customers affected` : quantile transform
+- `demand loss (mw)`: standardize
+
+acc=0.8197674418604651
+f1=0.6004905812710123
 
 ## Fairness Analysis
