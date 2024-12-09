@@ -207,7 +207,7 @@ Below is the empirical distribution of the Total Variation Distance (TVD).
 <iframe
   src="assets/MD-month-ccd-tvd.html"
   width="1000"
-  height="550"
+  height="450"
   frameborder="0"
 ></iframe>
 
@@ -234,8 +234,8 @@ Below is a horizontal bar chart depicting the distribution of the cause categori
 
 <iframe
   src="assets/TEST-ccd-climate-reg.html"
-  width="850"
-  height="450"
+  width="950"
+  height="550"
   frameborder="0"
 ></iframe>
 
