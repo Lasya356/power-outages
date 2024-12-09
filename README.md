@@ -273,13 +273,13 @@ We dropped any missing values in the `climate region` and `outage duration (hour
 
 We one-hot-encoded `climate region` and dropped the first column from the result of nine binary columns to avoid multicollinearity. Next, we standardized the `outage durations (hours)` column, as it will allow the random forest classifier model to perform more efficiently.
 
-After fitting the model, it achieved an accuracy of 61.41% and an F-1 score of 35.99%. This model performed quite poorly, considering the large discrepancy between the F-1 and accuracy scores. This also suggests a heavy class imbalance, likely due the high frequency of the 'severe weather' cause category, causing our baseline model to predict this category often.
+After fitting the model, it achieved an accuracy of 58.42% and an F-1 score of 30.63%. This model performed quite poorly, considering the large discrepancy between the F-1 and accuracy scores. This also suggests a heavy class imbalance, likely due the high frequency of the 'severe weather' cause category, causing our baseline model to predict this category often.
 
 Our baseline model did not perform well, due to the presence of class imbalance within the target variable. The model's reliance on predicting the 'severe weather' cause category often greatly overstates the model's performance and ability to generalize to unseen data.
 
 ## Final Model
 
-<!-- 1. Feature Engineering
+1. Feature Engineering
 
 - `year` : one-hot encode
 - `climate region` : one-hot encode
@@ -287,7 +287,12 @@ Our baseline model did not perform well, due to the presence of class imbalance 
 - `customers affected` : quantile transform
 - `demand loss (mw)`: standardize
 
-acc=0.8197674418604651
-f1=0.6004905812710123 -->
+**baseline model**
+accuracy score = 0.5842391304347826
+f1 score = 0.30630773599402067
+
+**final model**
+accuracy score = 0.9841269841269841
+f1 score = 0.9538464922202952
 
 ## Fairness Analysis
