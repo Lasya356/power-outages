@@ -1,6 +1,6 @@
 # Power Outages Data Analysis
 
-<!-- <p>Authors: Ritvik Mohindru and Sai Sri Lasya Yadlapati</p> -->
+<p>Authors: Ritvik Mohindru and Sai Sri Lasya Yadlapati</p>
 
 ## Introduction
 
@@ -191,6 +191,90 @@ It's evident that the.
 
 ## Assessment of Missingness
 
+### NMAR Analysis
+
+In the dataset, many columns have missing values. Specifically, the missing values in the `demand loss mw` column in this dataset are likely to be not missing at random (NMAR). In simple terms, demand loss (megawatts) represents the amount of power lost during an outage event. However, in most cases, the value seems to be reflecting the total power loss over the duration of the outage, rather than at a single point. This column is possibly NMAR, as the missingness is likely dependent on the values itself -- for example, if the demand loss is too large to be computed. The complexities involved in computing these values may have resulted in the column's missingness. Essentially, larger outage events, which usually involve more complex calculations, such as aggregating power loss data from multiple companies and multiple causal factors, are more prone to missing values. This suggests that the missigness of the values in the `demand loss mw` column are dependent on the values themselves -- as larger values are likely to be missing. Therefore, the `demand loss mw` column is likely NMAR, as the missingness of the values likely depend on the scale of the outage event, as the values would be more difficult to compute for larger outages.
+
+However, additional data can be gathered to make the missingness of this column MAR (missing at random). Obtaining data regarding the electricity generated during the power outage would make the `demand loss mw` column MAR. The `demand loss mw` column is calculated based on the amount of power lost during an outage event, which reqiures information about the power generated. If the data on the amount of power generated were missing, the `demand loss mw` column should, in theory, also be missing. In this specific case, the missigness of `demand loss mw` would depend on the new "power generated" column. Thus, collecting data on the electricity generated during the outage event can help explain the missingness of `demand loss mw`, making it MAR.
+
+### Missingness Dependency
+
+In this section, we investigates whether there was a missingness dependency between the `month` column and two other columns: `outage restoration` and `cause category detail`.
+
+#### `month` Against `outage restoration`
+
+We tested whether the missingness in the `outage restoration` column is dependent on the `month` column.
+
+**Null Hypothesis**: The distribution of `month` is the same when `outage restoration` is missing and not missing.
+
+**Alternative Hypothesis**: The distribution of `month` is different when `outage restoration` is missing and not missing.
+
+**Test Statistic**: We used the Total Variation Distance (TVD) as our test statistic.
+
+**Observed TVD**: We found an observed TVD of 0.223.
+
+**Significance Level**: We chose to set the significance level at 0.05.
+
+**Resulting P-Value**: After performing 1,000 permutations, we got a p-value of 0.136.
+
+**Visualizations**:
+Below is a horizontal bar chart depicting the distribution of the `month` column when `outage restoration` is missing and when it is not missing.
+
+<iframe
+  src="assets/MD-month-outage-rest.html"
+  width="1000"
+  height="550"
+  frameborder="0"
+></iframe>
+
+Below is the empirical distribution of the Total Variation Distance (TVD).
+
+<iframe
+  src="assets/MD-month-outage-rest-tvd.html"
+  width="1000"
+  height="550"
+  frameborder="0"
+></iframe>
+
+**Conclusion**: After conducting the permutation test, the p-value obtained was 0.136, which is greater than the specified significance level of 0.05. Thus, we fail to reject the null hypothesis -- that the distribution of `month` is the same when `outage restoration` is missing and not missing -- meaning that the missingness of the `outage restoration` column is not dependent on the `month` column.
+
+#### `month` Against `cause category detail`
+
+We tested whether the missingness in the `cause category detail` column is dependent on the `month` column.
+
+**Null Hypothesis**: The distribution of `month` is the same when `cause category detail` is missing and not missing.
+
+**Alternative Hypothesis**: The distribution of `month` is different when `cause category detail` is missing and not missing.
+
+**Test Statistic**: We used the Total Variation Distance (TVD) as our test statistic.
+
+**Observed TVD**: We found an observed TVD of 0.15.
+
+**Significance Level**: We chose to set the significance level at 0.05.
+
+**Resulting P-Value**: After performing 1,000 permutations, we got a p-value of 0.0.
+
+**Visualizations**:
+Below is a horizontal bar chart depicting the distribution of the `month` column when `cause category detail` is missing and when it is not missing.
+
+<iframe
+  src="assets/MD-month-ccd.html"
+  width="1000"
+  height="550"
+  frameborder="0"
+></iframe>
+
+Below is the empirical distribution of the Total Variation Distance (TVD).
+
+<iframe
+  src="assets/MD-month-ccd-tvd.html"
+  width="1000"
+  height="550"
+  frameborder="0"
+></iframe>
+
+**Conclusion**: After conducting the permutation test, the p-value obtained was 0.0, which is less than the specified significance level of 0.05. Thus, we reject the null hypothesis -- that the distribution of `month` is the same when `cause category detail` is missing and not missing -- meaning that the missingness of the `cause category detail` column is dependent on the `month` column.
+
 ## Hypothesis Testing
 
 In this hypothesis test, we examine whether the distribution of climate regions, specifically the West and Central climate regions, differs significantly across various cause categories. This analysis is important, as it can help explain the relationship between specific climate regions and cause categories and understand how regional factors could influence the types of events causing power outages.
@@ -207,8 +291,24 @@ In this hypothesis test, we examine whether the distribution of climate regions,
 
 **Resulting P-Value**: After performing 10,000 permutations, we got a p-value of 0.0.
 
-**Visualization**:
+**Visualizations**:
+Below is a horizontal bar chart depicting the distribution of the cause categories over the two climate regions: West and Central.
+
+<iframe
+  src="assets/TEST-ccd-climate-reg.html"
+  width="850"
+  height="450"
+  frameborder="0"
+></iframe>
+
 Below is a histogram illustrating the distribution of our test statistics from the permutation test. The test statistic represents the total variation distance between the West and Central climate region distributions across 10,000 permutations. The observed test statistic (red line) is also shown.
+
+<iframe
+  src="assets/UNI-TEST-tvd-cause-cat.html"
+  width="850"
+  height="450"
+  frameborder="0"
+></iframe>
 
 **Conclusion**: After conducting the permutation test, the p-value obtained was 0.0, which is much less than the specified significance level of 0.05. Thus, we reject the null hypothesis and conclude that there is a significant difference in the distribution of the West and Central climate regions across all cause categories.
 
