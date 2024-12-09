@@ -51,12 +51,7 @@ Below is a detailed description of the data cleaning procedure that we implement
 
    - We converted the `OBS` index, along with the `YEAR` and `MONTH` columns to integers. It seems more reasonable for the `MONTH` and `YEAR` columns to be stored as integers, rather than as floats (specifically converted `MONTH` to a nullible integer `Int64`, to account for any missing values).
 
-<!-- 3. Handle Missing Data
-
-   - We filled missing values in the `CUSTOMERS.AFFECTED` column to 0.0, as NaN values in this column suggest that no customers were affected by the outage event.
-   - Also converted the `DEMAND.LOSS.MW` column to float and filled any missing values with 0.0, as any missing demand loss could imply no measurable demand lost during the outage. -->
-
-3. Creating and Renaming Columns
+3. Creating, Removing, and Renaming Columns
 
    - We renamed the `OUTAGE.DURATION` column to `OUTAGE.DURATION (MINUTES)` to clarify the units.
    - Created a new column, `OUTAGE.DURATION.HOURS` by dividing the `OUTAGE.DURATION (MINUTES)` by 60 to help with simpler graphing during our later analysis.
@@ -70,6 +65,10 @@ Below is a detailed description of the data cleaning procedure that we implement
 
    - We removed the periods and underscores in the column names and also lower-cased the column names to achieve unformity in the dataset's columns.
 
+<!-- 3. Handle Missing Data
+
+   - We filled missing values in the `CUSTOMERS.AFFECTED` column to 0.0, as NaN values in this column suggest that no customers were affected by the outage event.
+   - Also converted the `DEMAND.LOSS.MW` column to float and filled any missing values with 0.0, as any missing demand loss could imply no measurable demand lost during the outage. -->
 <br>
 Below are the first five rows of the cleaned dataset that we will be utilizing for our analysis:
 
@@ -176,15 +175,15 @@ It's evident that the.
 
 | climate region     | outage duration (hours) | customers affected | demand loss mw |
 | :----------------- | ----------------------: | -----------------: | -------------: |
-| Central            |                 45.0188 |            99545.8 |        198.155 |
-| East North Central |                 89.2007 |             118333 |        280.203 |
-| Northeast          |                 49.8609 |            92689.6 |        257.957 |
-| Northwest          |                 21.4083 |            38242.7 |        78.1667 |
-| South              |                  47.435 |             124204 |        181.245 |
+| Central            |                 45.0188 |             126810 |        477.482 |
+| East North Central |                 89.2007 |             138389 |        560.406 |
+| Northeast          |                 49.8609 |             121960 |        537.411 |
+| Northwest          |                 21.4083 |              81420 |        177.897 |
+| South              |                  47.435 |             183501 |        399.087 |
 
 <br>
 <iframe
-  src="assets/AGG-customers-affected-by-climate-reg.html"
+  src="assets/AGG-climate-region-outage-dur.html"
   width="850"
   height="550"
   frameborder="0"
