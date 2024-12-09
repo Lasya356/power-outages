@@ -189,18 +189,19 @@ It's evident that the.
 
 In this hypothesis test, we examine whether the mean severity of power outages differs significantly between two cause categories: severe weather and equipment failure. This analysis is important, as it can help explain how weather-related events vs infrastructure issues can influence the severity of major power outages.
 
-Null Hypothesis: There is no difference in the mean severity between severe weather and equipment failure cause categories.
+**Null Hypothesis**: There is no difference in the mean severity between severe weather and equipment failure cause categories.
 
-Alternative Hypothesis: There is a significant difference in the mean severity between severe weather and equipment failure cause categories.
+**Alternative Hypothesis**: There is a significant difference in the mean severity between severe weather and equipment failure cause categories.
 
-Test Statistic: Absolute difference of mean severity of the severe weather and equipment failure cause categories.
+**Test Statistic**: Absolute difference of mean severity of the severe weather and equipment failure cause categories.
 
-Significance Level: We chose to set the significance level at 0.05, as it's a standard and commonly accepted significance level.
+**Significance Level**: We chose to set the significance level at 0.05, as it's a standard and commonly accepted significance level.
 
-Test: We chose to use a permutation test, as it allows us to compare the mean severity between the severe weather and equipment failure cause categories without making assumptions about the distribution of the data they come from.
+**Test**: We chose to use a permutation test, as it allows us to compare the mean severity between the severe weather and equipment failure cause categories without making assumptions about the distribution of the data they come from.
 
-Resulting P-Value: 0.025
+**Resulting P-Value**: 0.025
 
+**Visualization**:
 Below is a histogram illustrating the distribution of our test statistics from the permutation test, which represents the difference in means between severe weather and equipment failure categories across 10,000 permutations. The observed difference of means lies much off to right of the distribution, and the p-value of 0.0025 proves that the absolute difference in mean severity between the two cause categories is statistically significant at the 5% significance level.
 
 <iframe
@@ -208,7 +209,7 @@ Below is a histogram illustrating the distribution of our test statistics from t
   frameborder="0"
 ></iframe>
 
-Conclusion: After conducting the permutation test, the p-value obtained was 0.025, which is less than the specified significance level of 0.05. Thus, we reject hte null hypothesis and conclude that there is a significant difference in the mean severity between power outages caused by severe weather and those caused by equipment failure. We can also conclude that cause category is associated with the severity of major power outages.
+**Conclusion**: After conducting the permutation test, the p-value obtained was 0.025, which is less than the specified significance level of 0.05. Thus, we reject hte null hypothesis and conclude that there is a significant difference in the mean severity between power outages caused by severe weather and those caused by equipment failure. We can also conclude that cause category is associated with the severity of major power outages.
 
 ## Framing a Prediction Problem
 
