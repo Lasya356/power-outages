@@ -184,8 +184,8 @@ It's evident that the.
 <br>
 <iframe
   src="assets/AGG-climate-region-outage-dur.html"
-  width="850"
-  height="550"
+  width="1000"
+  height="1000"
   frameborder="0"
 ></iframe>
 
