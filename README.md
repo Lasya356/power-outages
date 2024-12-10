@@ -66,16 +66,19 @@ Below is a detailed description of the data cleaning procedure that we implement
 
    - We removed the periods and underscores in the column names and also lower-cased the column names to achieve unformity in the dataset's columns.
 
-<br>
-Below are the first five rows of the cleaned dataset that we will be utilizing for our analysis:
+6. Handling Missing Data
+   - In the model creation section, we will be predicting `cause category`. So, we want to deal with any missing values in our potential feature columns before fitting them to any model. First, we conducted a permutation test to determine whether any of the relevant columns are MAR (missing at random) dependent on our target variable, `cause category`. From the results of this test, we concluded that the `outage duration (hours)`, `customers affected`, and `demand loss mw`, columns are MAR dependent on `cause category`. With this in mind, we moved forward to probabilistically imputing the missing values in these columns.
+
+  <br>
+  Below are the first five rows of the cleaned dataset that we will be utilizing for our analysis:
 
 | obs | month | year | state     | postal code | nerc region | climate region     | climate category | outage start        | outage restoration  | outage duration (minutes) | outage duration (hours) | cause category     | cause category detail | customers affected | total customers |  population | demand loss mw |
 | --: | ----: | ---: | :-------- | :---------- | :---------- | :----------------- | :--------------- | :------------------ | :------------------ | ------------------------: | ----------------------: | :----------------- | :-------------------- | -----------------: | --------------: | ----------: | -------------: |
-|   1 |     7 | 2011 | Minnesota | MN          | MRO         | East North Central | normal           | 2011-07-01 17:00:00 | 2011-07-03 20:00:00 |                      3060 |                      51 | severe weather     | nan                   |              70000 |      2.5957e+06 | 5.34812e+06 |              0 |
+|   1 |     7 | 2011 | Minnesota | MN          | MRO         | East North Central | normal           | 2011-07-01 17:00:00 | 2011-07-03 20:00:00 |                      3060 |                      51 | severe weather     | hurricanes            |              70000 |      2.5957e+06 | 5.34812e+06 |             50 |
 |   2 |     5 | 2014 | Minnesota | MN          | MRO         | East North Central | normal           | 2014-05-11 18:38:00 | 2014-05-11 18:39:00 |                         1 |               0.0166667 | intentional attack | vandalism             |                  0 |     2.64074e+06 | 5.45712e+06 |              0 |
-|   3 |    10 | 2010 | Minnesota | MN          | MRO         | East North Central | cold             | 2010-10-26 20:00:00 | 2010-10-28 22:00:00 |                      3000 |                      50 | severe weather     | heavy wind            |              70000 |      2.5869e+06 |  5.3109e+06 |              0 |
-|   4 |     6 | 2012 | Minnesota | MN          | MRO         | East North Central | normal           | 2012-06-19 04:30:00 | 2012-06-20 23:00:00 |                      2550 |                    42.5 | severe weather     | thunderstorm          |              68200 |     2.60681e+06 | 5.38044e+06 |              0 |
-|   5 |     7 | 2015 | Minnesota | MN          | MRO         | East North Central | warm             | 2015-07-18 02:00:00 | 2015-07-19 07:00:00 |                      1740 |                      29 | severe weather     | nan                   |             250000 |     2.67353e+06 | 5.48959e+06 |            250 |
+|   3 |    10 | 2010 | Minnesota | MN          | MRO         | East North Central | cold             | 2010-10-26 20:00:00 | 2010-10-28 22:00:00 |                      3000 |                      50 | severe weather     | heavy wind            |              70000 |      2.5869e+06 |  5.3109e+06 |              8 |
+|   4 |     6 | 2012 | Minnesota | MN          | MRO         | East North Central | normal           | 2012-06-19 04:30:00 | 2012-06-20 23:00:00 |                      2550 |                    42.5 | severe weather     | thunderstorm          |              68200 |     2.60681e+06 | 5.38044e+06 |           1800 |
+|   5 |     7 | 2015 | Minnesota | MN          | MRO         | East North Central | warm             | 2015-07-18 02:00:00 | 2015-07-19 07:00:00 |                      1740 |                      29 | severe weather     | thunderstorm          |             250000 |     2.67353e+06 | 5.48959e+06 |            250 |
 
 ### Univariate Analysis
 
@@ -99,6 +102,15 @@ The box plot below displays the relationship between cause categories of power o
   frameborder="0"
 ></iframe>
 
+The heatmap below illustrates the frequency of outages of different NERC regions and cause categories. The visualization highlights the NERC region areas where certain cause categories, such as severe weather, are more prevalent; this allows us to identify regions with higher outage frequency.
+
+<iframe
+  src="assets/BI-heatmap.html"
+  width="1000"
+  height="550"
+  frameborder="0"
+></iframe>
+
 ### Interesting Aggregates
 
 Here, we explored the relationship between climate region and key factors such as outage duration, customers affected, and demand loss in megawatts.
@@ -107,15 +119,15 @@ The following dataframe summarizes the aggregated mean values for these factors,
 
 | climate region     | outage duration (hours) | customers affected | demand loss mw |
 | :----------------- | ----------------------: | -----------------: | -------------: |
-| Central            |                 45.0188 |             126810 |        477.482 |
-| East North Central |                 89.2007 |             138389 |        560.406 |
-| Northeast          |                 49.8609 |             121960 |        537.411 |
-| Northwest          |                 21.4083 |              81420 |        177.897 |
-| South              |                  47.435 |             183501 |        399.087 |
-| Southeast          |                 36.9614 |             180540 |        761.533 |
-| Southwest          |                 26.1023 |            39028.9 |        424.556 |
-| West               |                 27.1389 |             194580 |        651.457 |
-| West North Central |                 11.6094 |              47316 |            326 |
+| Central            |                 44.0897 |             116776 |         483.64 |
+| East North Central |                 90.0326 |             123414 |         690.58 |
+| Northeast          |                 49.3746 |             108378 |        487.326 |
+| Northwest          |                  23.609 |            39672.5 |        113.992 |
+| South              |                 50.0972 |             138166 |        552.555 |
+| Southeast          |                 37.8253 |             170279 |        713.235 |
+| Southwest          |                 27.3225 |            70867.1 |        232.152 |
+| West               |                 30.0334 |             150173 |        774.507 |
+| West North Central |                 11.0284 |            30829.1 |        382.471 |
 
 <iframe
   src="assets/AGG-climate-region-outage-dur.html"
@@ -142,7 +154,7 @@ However, additional data can be gathered to make the missingness of this column 
 
 In this section, we investigates whether there was a missingness dependency between the `month` column and two other columns: `outage restoration` and `cause category detail`.
 
-#### Month Against Outage Restoration
+#### Testing Outage Restoration Against Month
 
 We tested whether the missingness in the `outage restoration` column is dependent on the `month` column.
 
@@ -156,14 +168,14 @@ We tested whether the missingness in the `outage restoration` column is dependen
 
 **Significance Level**: We chose to set the significance level at 0.05.
 
-**Resulting P-Value**: After performing 10,000 permutations, we got a p-value of 0.1238.
+**Resulting P-Value**: After performing 10,000 permutations, we got a p-value of 0.125.
 
 **Visualizations**:
 
 Below is a horizontal bar chart depicting the distribution of the `month` column when `outage restoration` is missing and when it is not missing.
 
 <iframe
-  src="assets/MD-month-outage-rest.html"
+  src="assets/MD-outage-rest-month.html"
   width="1000"
   height="550"
   frameborder="0"
@@ -172,35 +184,36 @@ Below is a horizontal bar chart depicting the distribution of the `month` column
 Below is the empirical distribution of the Total Variation Distance (TVD).
 
 <iframe
-  src="assets/MD-month-outage-rest-tvd.html"
+  src="assets/MD-outage-rest-month-tvd.html"
   width="1000"
   height="500"
   frameborder="0"
 ></iframe>
-**Conclusion**: After conducting the permutation test, the p-value obtained was 0.136, which is greater than the specified significance level of 0.05. Thus, we fail to reject the null hypothesis -- that the distribution of `month` is the same when `outage restoration` is missing and not missing -- meaning that the missingness of the `outage restoration` column is not dependent on the `month` column.
 
-#### Month Against Cause Category Detail
+**Conclusion**: After conducting the permutation test, the p-value obtained was 0.125, which is greater than the specified significance level of 0.05. Thus, we fail to reject the null hypothesis -- that the distribution of `month` is the same when `outage restoration` is missing and not missing -- meaning that the missingness of the `outage restoration` column is not dependent on the `month` column.
 
-We tested whether the missingness in the `cause category detail` column is dependent on the `month` column.
+#### Testing Outage Restoration Against Cause Category
 
-**Null Hypothesis**: The distribution of `month` is the same when `cause category detail` is missing and not missing.
+We tested whether the missingness in the `outage restoration` column is dependent on the `cause category` column.
 
-**Alternative Hypothesis**: The distribution of `month` is different when `cause category detail` is missing and not missing.
+**Null Hypothesis**: The distribution of `cause category` is the same when `outage restoration` is missing and not missing.
+
+**Alternative Hypothesis**: The distribution of `cause category` is different when `outage restoration` is missing and not missing.
 
 **Test Statistic**: We used the Total Variation Distance (TVD) as our test statistic.
 
-**Observed TVD**: We found an observed TVD of 0.15.
+**Observed TVD**: We found an observed TVD of 0.252.
 
 **Significance Level**: We chose to set the significance level at 0.05.
 
-**Resulting P-Value**: After performing 10,000 permutations, we got a p-value of 0.0.
+**Resulting P-Value**: After performing 10,000 permutations, we got a p-value of 0.0012.
 
 **Visualizations**:
 
-Below is a horizontal bar chart depicting the distribution of the `month` column when `cause category detail` is missing and when it is not missing.
+Below is a horizontal bar chart depicting the distribution of the `cause category` column when `outage restoration` is missing and when it is not missing.
 
 <iframe
-  src="assets/MD-month-ccd.html"
+  src="assets/MD-outage-rest-cc.html"
   width="1000"
   height="550"
   frameborder="0"
@@ -209,13 +222,13 @@ Below is a horizontal bar chart depicting the distribution of the `month` column
 Below is the empirical distribution of the Total Variation Distance (TVD).
 
 <iframe
-  src="assets/MD-month-ccd-tvd.html"
+  src="assets/MD-outage-rest-cc-tvd.html"
   width="1000"
   height="550"
   frameborder="0"
 ></iframe>
 
-**Conclusion**: After conducting the permutation test, the p-value obtained was 0.0, which is less than the specified significance level of 0.05. Thus, we reject the null hypothesis -- that the distribution of `month` is the same when `cause category detail` is missing and not missing -- meaning that the missingness of the `cause category detail` column is dependent on the `month` column.
+**Conclusion**: After conducting the permutation test, the p-value obtained was 0.0012, which is much less than the specified significance level of 0.05. Thus, we reject the null hypothesis -- that the distribution of `cause category` is the same when `outage restoration` is missing and not missing -- meaning that the missingness of the `outage restoration` column is dependent on the `cause category` column.
 
 ## Hypothesis Testing
 
@@ -244,7 +257,7 @@ Below is a horizontal bar chart depicting the distribution of the cause categori
   frameborder="0"
 ></iframe>
 
-Below is a histogram illustrating the distribution of our test statistics from the permutation test. The test statistic represents the total variation distance between the West and Central climate region distributions across 10,000 permutations. The observed test statistic (red line) is also shown.
+Below is a histogram illustrating the distribution of our test statistics from the permutation test. The test statistic represents the total variation distance (TVD) between the West and Central climate region distributions across 10,000 permutations. The observed test statistic (red line) is also shown.
 
 <iframe
   src="assets/TEST-tvd-cause-cat.html"
@@ -257,42 +270,71 @@ Below is a histogram illustrating the distribution of our test statistics from t
 
 ## Framing a Prediction Problem
 
-From the hypothesis test conducted above, we found that there is a significant difference in some of the climate regions across all cause categories. This detail suggests that climatic factors could possibly influence the cause of outages. Assuming this, it's important to determine whether we can predict the cause category based on other variables, such as climate region, outage duration, customers affected, etc.
+From the hypothesis test conducted above, we found that there is a significant difference in some of the climate regions across all cause categories. This detail suggests that climatic factors could possibly influence the cause of outages. Assuming this, it's important to determine whether we can predict the cause category based on other variables, such as climate category, outage duration, customers affected, etc.
 
 Simply put, our prediction problem is a multiclass classification task, where we aim to predict the cause of a major power outage (i.e. the `cause category` column).
 
-We will be building a random forest classifier to predict the `cause category` column (response variable) because it can provide important information about the cause of the outage, which can allow utility companies to implement preventive measures and improve infrastructure where needed. The two mentioned features will generally be available at the time of prediction.
+We will be building a random forest classifier to predict the `cause category` column (response variable) because it can provide important information about the cause of the outage, which can allow utility companies to implement preventive measures and improve infrastructure where needed. The features we will be utilizing for the models will generally be available at the time of prediction.
 
-We will be using accuracy as one of our metrics. Accuracy as an evaluation metric can oftentimes be misleading if the classes in `cause category` are imbalanced. For instance, if severe weather were to occur more frequently as a cause than, islanding, for example, then accuracy will likely exaggerate our model's performance. Because this may very well be the case, we will opt for the F-1 score as well, as it does a great job of factoring in the model's precision and recall when a class imbalance is present.
+We will be using accuracy as one of our metrics. Accuracy as an evaluation metric can oftentimes be misleading if the classes in `cause category` are imbalanced. For instance, if 'severe weather' were to occur more frequently as a cause than, 'islanding', for example, then accuracy will likely exaggerate our model's performance. Because this may very well be the case, we will also opt for the F-1 score, as it does a great job of factoring in the model's precision and recall when a class imbalance is present.
 
 ## Baseline Model
 
-For our baseline model, we used a Random Forest classifier to predict the `cause category` of major power outages, given only two feature columns: `climate region` (a categorical nominal column) and `outage duration (hours)` (a quantitative continuous column). `climate region` and `outage duration (hours)`.
+For our baseline model, we used a Random Forest classifier to predict the `cause category` of major power outages, given only two feature columns: `climate category` (a categorical nominal column) and `outage duration (hours)` (a quantitative continuous column).
 
-We dropped any missing values in the `climate region` and `outage duration (hours)` to keep the model simple and avoid any issues while fitting the model.
+We one-hot-encoded `climate region` to transform the categorical data into nine binary columns and then standardized the `outage durations (hours)` column, as it will allow the random forest classifier model to perform more efficiently when quantitative columns are at the same scale.
 
-We one-hot-encoded `climate region` and dropped the first column from the result of nine binary columns to avoid multicollinearity. Next, we standardized the `outage durations (hours)` column, as it will allow the random forest classifier model to perform more efficiently.
+After fitting the model, it achieved an accuracy of 58.33% and an F-1 score of 29.07%. The model performed quite poorly, given the nearly 30% discrepancy between the accuracy and F-1 scores. This could suggest a moderate class imbalance, likely due the relatively higher frequency of the 'severe weather' cause category, influencing our baseline model to predict this category often.
 
-After fitting the model, it achieved an accuracy of 58.42% and an F-1 score of 30.63%. This model performed quite poorly, considering the large discrepancy between the F-1 and accuracy scores. This also suggests a heavy class imbalance, likely due the high frequency of the 'severe weather' cause category, causing our baseline model to predict this category often.
-
-Our baseline model did not perform well, due to the presence of class imbalance within the target variable. The model's reliance on predicting the 'severe weather' cause category often greatly overstates the model's performance and ability to generalize to unseen data.
+Thus, our baseline model did not perform well, due to the presence of class imbalance within the target variable. The model's reliance on predicting the 'severe weather' cause category more often greatly overstates the model's performance and ability to generalize to unseen data.
 
 ## Final Model
 
-<!-- 1. Feature Engineering
+### Feature Engineering
 
-- `year` : one-hot encode
-- `climate region` : one-hot encode
-- `outage duration (hours)` : standardize
-- `customers affected` : quantile transform
-- `demand loss (mw)`: standardize
+For our final model, we used the following columns and engineered useful features out of them.
 
-**baseline model**
-accuracy score = 0.5842391304347826
-f1 score = 0.30630773599402067
+- One-Hot Encoded
 
-**final model**
-accuracy score = 0.9841269841269841
-f1 score = 0.9538464922202952 -->
+  - # `nerc region`
+  - As seen in the heatmap from the Univariate
+
+  - `year`
+
+- Standardized
+
+  - `outage duration (hours)`
+
+- Transformed by Quantiles
+
+  - `demand loss mw`
+
+  - `customers affected`
+
+State the features you added and why they are good for the data and prediction task. Talk about why you believe these features improved your model’s performance from the perspective of the data generating process.
+
+### Final Model Overview
+
+- We chose the `RandomForestClassifier` as our modeling algorithm.
+
+- We used `GridSearchCV` to determine the best hyperparameters to use for the `RandomForestClassifier`. We found that the best combination of hyperparameters were max depth set to 25, minimum number of samples to split set to 20, number of estimators set to 50, and the class weight set to 'balanced_subsample'.
+
+- After fitting the final model and performing predictions, the final accuracy achieved on the test set was 85.68% and the F-1 score was 67.19%, proving that our model performs relatively well in handling class imbalances and does a good job of generalizing to unseen data.
+
+- Our final model's performance is an improvement from our baseline model's performance. The accuracy of our baseline model was 58.33% and the accuracy of our final model is 85.68%. The F-1 score of our baseline model was 29.07% and the F-1 score of our final model is now 67.19%. With our final model implementation, the accuracy improved by 27.35%, while the F-1 score grew by 38.12%! Thus, given the considerable improvements of our model's performance, we believe that our final model effectively predicted the target variable.
+
+| Metric   | Before | After  | Change |
+| -------- | ------ | ------ | ------ |
+| Accuracy | 58.33% | 85.68% | 27.35% |
+| F-1      | 29.07% | 67.19% | 38.12% |
+
+Below is a confusion matrix to illustrate its performance:
+
+<iframe
+  src="assets/FIN-confusion-matrix.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 ## Fairness Analysis
