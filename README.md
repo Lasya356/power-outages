@@ -1,6 +1,6 @@
 # Power Outages Data Analysis
 
-<p>Authors: Sai Sri Lasya Yadlapati and Ritvik Mohindru</p>
+Authors: Sai Sri Lasya Yadlapati and Ritvik Mohindru
 
 ## Introduction
 
@@ -21,7 +21,6 @@ Some key columns that we will be using in our analysis are described below:
 | `MONTH`                   | Month that outage event occurred                                                                   |
 | `YEAR`                    | Year that outage event occurred                                                                    |
 | `U.S._STATE`              | U.S. state in which outage event occurred                                                          |
-| `POSTAL.CODE`             | Postal code of U.S. state in which outage event occurred                                           |
 | `NERC.REGION`             | North American Electric Reliability Corporation (NERC) region that in which outage event occurred  |
 | `CLIMATE.REGION`          | The U.S. climate region, as specified by the National Centers for Environmental Information (NCEI) |
 | `CLIMATE.CATEGORY`        | Climate episode corresponding to the year                                                          |
@@ -32,7 +31,7 @@ Some key columns that we will be using in our analysis are described below:
 | `CAUSE.CATEGORY`          | Main category outage cause                                                                         |
 | `CAUSE.CATEGORY.DETAIL`   | Detailed description of outage cause                                                               |
 | `CUSTOMERS.AFFECTED`      | Number of customers affected by the outage event                                                   |
-| `TOTAL.CUSTOMERS`         | Total number of customers served annually in the U.S. state                                        |
+| `POPULATION`              | Population in the U.S. state in that particular year                                               |
 | `OUTAGE.DURATION`         | Duration of the outage event in minutes                                                            |
 | `DEMAND.LOSS.MW`          | Peak electricity demand lost during the outage event                                               |
 
@@ -54,9 +53,8 @@ Below is a detailed description of the data cleaning procedure that we implement
 
 3. Creating, Removing, and Renaming Columns
 
-   - We renamed the `OUTAGE.DURATION` column to `OUTAGE.DURATION (MINUTES)` to clarify the units.
-   - Created a new column, `OUTAGE.DURATION.HOURS` by dividing the `OUTAGE.DURATION (MINUTES)` by 60 to help with simpler graphing during our later analysis.
-   - Renamed the `U.S._STATE` column to just `STATE` for easier access to the column.
+   - We created a new column, `OUTAGE.DURATION (HOURS)` by dividing the `OUTAGE.DURATION` column by 60 to help with simpler graphing and accessing during our later analysis.
+   - We renamed the `U.S._STATE` column to just `STATE` for easier access to the column.
 
 4. Selecting Relevant Columns
 
@@ -339,3 +337,39 @@ Below is a confusion matrix to illustrate its performance:
 ></iframe>
 
 ## Fairness Analysis
+
+For our fairness analysis, we want to answer: is our model's performance on predicting the cause category worse for power outages where the population of the state is greater than 15 million than it is for power outages where the population of the state is less than 15 million?
+
+"For our fairness analysis, we want to answer: is our model's performance in predicting the cause of power outages worse for states with populations greater than 15 million compared to states with populations under 15 million?
+
+We defined our two groups to be:
+
+- Large Population, population greater than 15 million
+- Small Population, population less than 15 million
+
+For our evaluation metric, we chose precision.
+
+**Null Hypothesis**: Our model's performance is fair and its precision for states with large populations at the time and states with small populations at the time are roughly the same. Any differences are due to random chance.
+
+**Alternative Hypothesis**: Our model's performance is unfair and its precision for states with large populations at the time is lower than its precision for states with small populations at the time.
+
+**Test Statistic**: We chose the difference of precisions (large population precision - small population precision) as our test statistic.
+
+**Significance Level**: We chose to set the signficance level at 0.05.
+
+**Test**: In order to answer perform the fairness analysis, we will be using a permuation test.
+
+**Resulting P-Value**: After performing 10,000 permutations, we obtained a p-value of 0.1975.
+
+**Visualization**
+
+Below is a histogram illustrating the distribution of the test statistics from the permutation test.
+
+<iframe
+  src="assets/FAIR-perm-test-dist.html"
+  width="950"
+  height="450"
+  frameborder="0"
+></iframe>
+
+**Conclusion**: After conducting the permutation test, the p-value obtained was 0.1975, which is notably higher than the specified significance level of 0.05. Therefore, we fail to reject the null hypothesis -- that the model's performance is fair and its precision for states with large populations at the time and states with small populations at the time are roughly the same -- and conclude that any differences in model precision between these two groups may be due to random chance.
