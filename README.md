@@ -297,9 +297,12 @@ For our final model, we used the following columns and engineered useful feature
 - One-Hot Encoded
 
   - # `nerc region`
-  - As seen in the heatmap from the Bivariate Analysis section, some NERC regions seems to have higher prevalence of
+
+    - As seen in the heatmap from the Bivariate Analysis section, some NERC regions seems to have higher prevalence of outages due to a certain cause. By encoding this column and including it in our prediction model, we can capture the regional differences of power outages. For instance, some regions may have higher frequency of outage events due to a common cause, such as 'severe weather'. There must be a relationship between region and power outage cause, so it's reasonable to consider it as a one-hot encoded feature for predicting `cause category`.
 
   - `year`
+
+    - We chose to also include a one-hot encoded `year` feature in our prediction, as, in most cases, the year can provide insights into the cause of an outage. For instance,
 
 - Standardized
 
@@ -332,8 +335,8 @@ Below is a confusion matrix to illustrate its performance:
 
 <iframe
   src="assets/FIN-confusion-matrix.html"
-  width="800"
-  height="600"
+  width="1000"
+  height="900"
   frameborder="0"
 ></iframe>
 
