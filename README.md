@@ -297,7 +297,7 @@ For our final model, we used the following columns and engineered useful feature
 - One-Hot Encoded
 
   - # `nerc region`
-  - As seen in the heatmap from the Univariate
+  - As seen in the heatmap from the Bivariate Analysis section, some NERC regions seems to have higher prevalence of
 
   - `year`
 
