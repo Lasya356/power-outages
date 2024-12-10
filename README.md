@@ -133,7 +133,7 @@ The following dataframe summarizes the aggregated mean values for these factors,
   height="550"
   frameborder="0"
 ></iframe>
-
+<br>
 From the above bar chart and the aggregated table, it is evident that the East North Central climate region seems to have the longest lasting power outage events, on average, while the West North Central climate region seems to have the shortest.
 
 Additionally, the West North Central region also appears to have the least amount of customers affected and demand loss, on average.
@@ -298,6 +298,10 @@ For our final model, we used the following columns and engineered useful feature
 
     - As seen in the heatmap from the Bivariate Analysis section, some NERC regions seems to have higher prevalence of outages due to a certain cause. By encoding this column and including it in our prediction model, we can capture the regional differences of power outages. For instance, some regions may have higher frequency of outage events due to a common cause, such as 'severe weather'. There must be a relationship between region and power outage cause, so it's reasonable to consider it as a one-hot encoded feature for predicting `cause category`. We believe this feature would improve our model's performance, as regional factors can definitely be used to predict the cause of the outage.
 
+  - `climate category`
+
+    - Generally, the climate of an area plays a role in the outage cause. For instance, 'cold' climates may experience more power outages, as an increased demand in electricity could potentially strain the power grid. So, there is a relationship between the climate and the cause of the outage event. We believe this one-hot encoded feature would improve our model's performance, as climate data can shed light and give new perspectives on the cause of particular power outage events.
+
   - `year`
 
     - We chose to include a one-hot encoded `year` feature in our prediction because this can allow our model to consider changes in our data over time. For example, due due to significant technological advancements since the 2000s, the prevalence of an 'equipment failure' cause could have potentially decreased. Additionally, as a result of global warming, the effects of 'severe weather' could also lead to outage events. Thus, it's important to consider this feature in our prediction model. We believe this feature would improve our model's performance, as historical data can provide a lot of insight into power outage causes.
@@ -338,16 +342,14 @@ Below is a confusion matrix to illustrate its performance:
 
 ## Fairness Analysis
 
-For our fairness analysis, we want to answer: is our model's performance on predicting the cause category worse for power outages where the population of the state is greater than 15 million than it is for power outages where the population of the state is less than 15 million?
-
-"For our fairness analysis, we want to answer: is our model's performance in predicting the cause of power outages worse for states with populations greater than 15 million compared to states with populations under 15 million?
+For our fairness analysis, we want to answer: is our model's performance in predicting the cause of power outages worse for states with populations greater than 15 million compared to states with populations under 15 million?
 
 We defined our two groups to be:
 
 - Large Population, population greater than 15 million
 - Small Population, population less than 15 million
 
-For our evaluation metric, we chose precision.
+**Evaluation Metric**: For our evaluation metric, we chose precision.
 
 **Null Hypothesis**: Our model's performance is fair and its precision for states with large populations at the time and states with small populations at the time are roughly the same. Any differences are due to random chance.
 
@@ -359,7 +361,7 @@ For our evaluation metric, we chose precision.
 
 **Test**: In order to answer perform the fairness analysis, we will be using a permuation test.
 
-**Resulting P-Value**: After performing 10,000 permutations, we obtained a p-value of 0.1975.
+**Resulting P-Value**: After performing 10,000 permutations, we obtained a p-value of 0.1022.
 
 **Visualization**
 
@@ -368,8 +370,8 @@ Below is a histogram illustrating the distribution of the test statistics from t
 <iframe
   src="assets/FAIR-perm-test-dist.html"
   width="950"
-  height="450"
+  height="650"
   frameborder="0"
 ></iframe>
 
-**Conclusion**: After conducting the permutation test, the p-value obtained was 0.1975, which is notably higher than the specified significance level of 0.05. Therefore, we fail to reject the null hypothesis -- that the model's performance is fair and its precision for states with large populations at the time and states with small populations at the time are roughly the same -- and conclude that any differences in model precision between these two groups may be due to random chance.
+**Conclusion**: After conducting the permutation test, the p-value obtained was 0.1022, which is notably higher than the specified significance level of 0.05. Therefore, we fail to reject the null hypothesis -- that the model's performance is fair and its precision for states with large populations at the time and states with small populations at the time are roughly the same -- and conclude that any differences in model precision between these two groups may be due to random chance.
