@@ -294,27 +294,25 @@ Thus, our baseline model did not perform well, due to the presence of class imba
 
 For our final model, we used the following columns and engineered useful features out of them.
 
-- One-Hot Encoded
+- One-Hot Encoding
 
-  - # `nerc region`
+  - `nerc region`
 
-    - As seen in the heatmap from the Bivariate Analysis section, some NERC regions seems to have higher prevalence of outages due to a certain cause. By encoding this column and including it in our prediction model, we can capture the regional differences of power outages. For instance, some regions may have higher frequency of outage events due to a common cause, such as 'severe weather'. There must be a relationship between region and power outage cause, so it's reasonable to consider it as a one-hot encoded feature for predicting `cause category`.
+    - As seen in the heatmap from the Bivariate Analysis section, some NERC regions seems to have higher prevalence of outages due to a certain cause. By encoding this column and including it in our prediction model, we can capture the regional differences of power outages. For instance, some regions may have higher frequency of outage events due to a common cause, such as 'severe weather'. There must be a relationship between region and power outage cause, so it's reasonable to consider it as a one-hot encoded feature for predicting `cause category`. We believe this feature would improve our model's performance, as regional factors can definitely be used to predict the cause of the outage.
 
   - `year`
 
-    - We chose to also include a one-hot encoded `year` feature in our prediction, as, in most cases, the year can provide insights into the cause of an outage. For instance,
+    - We chose to include a one-hot encoded `year` feature in our prediction because this can allow our model to consider changes in our data over time. For example, due due to significant technological advancements since the 2000s, the prevalence of an 'equipment failure' cause could have potentially decreased. Additionally, as a result of global warming, the effects of 'severe weather' could also lead to outage events. Thus, it's important to consider this feature in our prediction model. We believe this feature would improve our model's performance, as historical data can provide a lot of insight into power outage causes.
 
-- Standardized
+- Standardization
 
   - `outage duration (hours)`
+    - Outage duration depends on cause category of the outage -- for instance, an 'intentional attack' could last a shorter amount of time because utility companies must have good infrastructure in place to deal with these; whereas 'severe weather' outages seem to have the longest outage durations due to their unpredictability and severity. We created a new feature from `outage duration (hours)` by standardizing it to scale it down, which ensures that the model considers it equally with other features and prevents it from being disproportionately influenced by outliers. We believe this feature would improve our model's performance, as the duration of an outage is liked to its severity, which can potentially help predict the cause of the event.
 
-- Transformed by Quantiles
-
-  - `demand loss mw`
+- Quantile Transformation
 
   - `customers affected`
-
-State the features you added and why they are good for the data and prediction task. Talk about why you believe these features improved your model’s performance from the perspective of the data generating process.
+    - The number of customers affected by the outage is an indicator of the scale of the event. The severity or scale of the power outage can help us predict _why_ it may have occurred. For instance, larger-scale outage events affecting thousands of people could be called by high-severity causes, such as 'severe weather' or 'equipment failure'. After plotting a boxplot of `customers affected`, we observed that this variable has a considerable amount of outliers and skewness. So, we decided to create a new feature out of this column by transforming it using `QuantileTransformer`. This transformer converts the data to a uniform distribution and accounts for outliers and skewness, which is necessary for this variable. We believe this feature would improve our model's performance, as, similar to outage duration, customers affected also plays a role in the scale or severity of an outage, which provides convincing insights into why an outage occurred.
 
 ### Final Model Overview
 
@@ -322,21 +320,21 @@ State the features you added and why they are good for the data and prediction t
 
 - We used `GridSearchCV` to determine the best hyperparameters to use for the `RandomForestClassifier`. We found that the best combination of hyperparameters were max depth set to 25, minimum number of samples to split set to 20, number of estimators set to 50, and the class weight set to 'balanced_subsample'.
 
-- After fitting the final model and performing predictions, the final accuracy achieved on the test set was 85.68% and the F-1 score was 67.19%, proving that our model performs relatively well in handling class imbalances and does a good job of generalizing to unseen data.
+- After fitting the final model and performing predictions, the final accuracy achieved on the test set was 81.51% and the F-1 score was 63.58%, proving that our model performs relatively well in handling class imbalances and does a good job of generalizing to unseen data.
 
-- Our final model's performance is an improvement from our baseline model's performance. The accuracy of our baseline model was 58.33% and the accuracy of our final model is 85.68%. The F-1 score of our baseline model was 29.07% and the F-1 score of our final model is now 67.19%. With our final model implementation, the accuracy improved by 27.35%, while the F-1 score grew by 38.12%! Thus, given the considerable improvements of our model's performance, we believe that our final model effectively predicted the target variable.
+- Our final model's performance is an improvement from our baseline model's performance. The accuracy of our baseline model was 58.33% and the accuracy of our final model is 81.51%. The F-1 score of our baseline model was 29.07% and the F-1 score of our final model is now 63.58%. With our final model implementation, the accuracy improved by 23.18%, while the F-1 score grew by 34.51%! Thus, given the considerable improvements of our model's performance, we believe that our final model effectively predicted the target variable.
 
 | Metric   | Before | After  | Change |
 | -------- | ------ | ------ | ------ |
-| Accuracy | 58.33% | 85.68% | 27.35% |
-| F-1      | 29.07% | 67.19% | 38.12% |
+| Accuracy | 58.33% | 81.51% | 23.18% |
+| F-1      | 29.07% | 63.58% | 34.51% |
 
 Below is a confusion matrix to illustrate its performance:
 
 <iframe
   src="assets/FIN-confusion-matrix.html"
   width="1000"
-  height="900"
+  height="750"
   frameborder="0"
 ></iframe>
 
