@@ -133,7 +133,6 @@ The following dataframe summarizes the aggregated mean values for these factors,
   height="550"
   frameborder="0"
 ></iframe>
-
 <br>
 From the above bar chart and the aggregated table, it is evident that the East North Central climate region seems to have the longest lasting power outage events, on average, while the West North Central climate region seems to have the shortest.
 
@@ -167,7 +166,7 @@ We tested whether the missingness in the `outage restoration` column is dependen
 
 **Significance Level**: We chose to set the significance level at 0.05.
 
-**Resulting P-Value**: After performing 10,000 permutations, we got a p-value of 0.1126.
+**Resulting P-Value**: After performing 10,000 permutations, we got a p-value of 0.125.
 
 **Visualizations**:
 
@@ -189,7 +188,7 @@ Below is the empirical distribution of the Total Variation Distance (TVD).
   frameborder="0"
 ></iframe>
 
-**Conclusion**: After conducting the permutation test, the p-value obtained was 0.1126, which is greater than the specified significance level of 0.05. Thus, we fail to reject the null hypothesis -- that the distribution of `month` is the same when `outage restoration` is missing and not missing -- meaning that the missingness of the `outage restoration` column is not dependent on the `month` column.
+**Conclusion**: After conducting the permutation test, the p-value obtained was 0.125, which is greater than the specified significance level of 0.05. Thus, we fail to reject the null hypothesis -- that the distribution of `month` is the same when `outage restoration` is missing and not missing -- meaning that the missingness of the `outage restoration` column is not dependent on the `month` column.
 
 #### Testing Outage Restoration Against Cause Category
 
@@ -205,7 +204,7 @@ We tested whether the missingness in the `outage restoration` column is dependen
 
 **Significance Level**: We chose to set the significance level at 0.05.
 
-**Resulting P-Value**: After performing 10,000 permutations, we got a p-value of 0.0013.
+**Resulting P-Value**: After performing 10,000 permutations, we got a p-value of 0.0012.
 
 **Visualizations**:
 
@@ -227,7 +226,7 @@ Below is the empirical distribution of the Total Variation Distance (TVD).
   frameborder="0"
 ></iframe>
 
-**Conclusion**: After conducting the permutation test, the p-value obtained was 0.0013, which is much less than the specified significance level of 0.05. Thus, we reject the null hypothesis -- that the distribution of `cause category` is the same when `outage restoration` is missing and not missing -- meaning that the missingness of the `outage restoration` column is dependent on the `cause category` column.
+**Conclusion**: After conducting the permutation test, the p-value obtained was 0.0012, which is much less than the specified significance level of 0.05. Thus, we reject the null hypothesis -- that the distribution of `cause category` is the same when `outage restoration` is missing and not missing -- meaning that the missingness of the `outage restoration` column is dependent on the `cause category` column.
 
 ## Hypothesis Testing
 
@@ -283,7 +282,7 @@ For our baseline model, we used a Random Forest classifier to predict the `cause
 
 We one-hot-encoded `climate region` to transform the categorical data into nine binary columns and then standardized the `outage durations (hours)` column, as it will allow the random forest classifier model to perform more efficiently when quantitative columns are at the same scale.
 
-After fitting the model, it achieved an accuracy of 59.90% and an F-1 score of 28.93%. The model performed quite poorly, given the roughly 30% discrepancy between the accuracy and F-1 scores. This could suggest a moderate class imbalance, likely due the relatively higher frequency of the 'severe weather' cause category, influencing our baseline model to predict this category often.
+After fitting the model, it achieved an accuracy of 58.33% and an F-1 score of 29.07%. The model performed quite poorly, given the nearly 30% discrepancy between the accuracy and F-1 scores. This could suggest a moderate class imbalance, likely due the relatively higher frequency of the 'severe weather' cause category, influencing our baseline model to predict this category often.
 
 Thus, our baseline model did not perform well, due to the presence of class imbalance within the target variable. The model's reliance on predicting the 'severe weather' cause category more often greatly overstates the model's performance and ability to generalize to unseen data.
 
@@ -323,14 +322,14 @@ For our final model, we used the following columns and engineered useful feature
 
 - We used `GridSearchCV` to determine the best hyperparameters to use for the `RandomForestClassifier`. We found that the best combination of hyperparameters were max depth set to 25, minimum number of samples to split set to 20, number of estimators set to 50, and the class weight set to 'balanced_subsample'.
 
-- After fitting the final model and performing predictions, the final accuracy achieved on the test set was 78.51% and the F-1 score was 58.40%, proving that our model performs relatively well in handling class imbalances and does a good job of generalizing to unseen data.
+- After fitting the final model and performing predictions, the final accuracy achieved on the test set was 81.51% and the F-1 score was 63.58%, proving that our model performs relatively well in handling class imbalances and does a good job of generalizing to unseen data.
 
-- Our final model's performance is an improvement from our baseline model's performance. The accuracy of our baseline model was 59.90% and the accuracy of our final model is 78.51%. The F-1 score of our baseline model was 28.93% and the F-1 score of our final model is now 58.40%. With our final model implementation, the accuracy improved by 18.61%, while the F-1 score grew by 29.47%! Thus, given the considerable improvements of our model's performance, we believe that our final model effectively predicted the target variable.
+- Our final model's performance is an improvement from our baseline model's performance. The accuracy of our baseline model was 58.33% and the accuracy of our final model is 81.51%. The F-1 score of our baseline model was 29.07% and the F-1 score of our final model is now 63.58%. With our final model implementation, the accuracy improved by 23.18%, while the F-1 score grew by 34.51%! Thus, given the considerable improvements of our model's performance, we believe that our final model effectively predicted the target variable.
 
 | Metric   | Before | After  | Change |
 | -------- | ------ | ------ | ------ |
-| Accuracy | 59.90% | 78.51% | 18.61% |
-| F-1      | 28.93% | 58.40% | 29.47% |
+| Accuracy | 58.33% | 81.51% | 23.18% |
+| F-1      | 29.07% | 63.58% | 34.51% |
 
 Below is a confusion matrix to illustrate its performance:
 
@@ -362,7 +361,7 @@ We defined our two groups to be:
 
 **Test**: In order to answer perform the fairness analysis, we will be using a permuation test.
 
-**Resulting P-Value**: After performing 10,000 permutations, we obtained a p-value of 0.082.
+**Resulting P-Value**: After performing 10,000 permutations, we obtained a p-value of 0.1022.
 
 **Visualization**
 
@@ -375,4 +374,4 @@ Below is a histogram illustrating the distribution of the test statistics from t
   frameborder="0"
 ></iframe>
 
-**Conclusion**: After conducting the permutation test, the p-value obtained was 0.082, which is notably higher than the specified significance level of 0.05. Therefore, we fail to reject the null hypothesis -- that the model's performance is fair and its precision for states with large populations at the time and states with small populations at the time are roughly the same -- and conclude that any differences in model precision between these two groups may be due to random chance.
+**Conclusion**: After conducting the permutation test, the p-value obtained was 0.1022, which is notably higher than the specified significance level of 0.05. Therefore, we fail to reject the null hypothesis -- that the model's performance is fair and its precision for states with large populations at the time and states with small populations at the time are roughly the same -- and conclude that any differences in model precision between these two groups may be due to random chance.
